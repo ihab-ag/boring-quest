@@ -1,7 +1,8 @@
-import { SafeAreaView, StatusBar, View } from 'react-native'
+import { SafeAreaView, StatusBar, Text, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
+import {DrawerNavigator} from './src/navigation/DrawerStack';
 
 
 export default function App() {
@@ -33,12 +34,14 @@ export default function App() {
 
 
   return (
-
+    <>
+    <DrawerNavigator />
     <View onLayout={onLayoutRootView}>
       <SafeAreaView>
         <StatusBar backgroundColor='#fff' barStyle='dark-content'/>
       </SafeAreaView>
     </View>
+    </>
   );
 }
 

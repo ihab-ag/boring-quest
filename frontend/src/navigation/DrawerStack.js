@@ -3,12 +3,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import QuestsScreen from "../screens/QuestsScreen";
 
 
-const Drawer = createDrawerNavigator()
+export const Drawer = createDrawerNavigator()
 
-const DrawerNavigator = () => {
+export const DrawerNavigator = () => {
+    return (
     <NavigationContainer>
-        <Drawer.Navigator>
-            <Drawer.Screen name='Quests' component={QuestsScreen} />
+        <Drawer.Navigator initialRouteName="Quests" useLegacyImplementation >
+            <Drawer.Screen name="Quests" component={QuestsScreen} />
         </Drawer.Navigator>
-    </NavigationContainer>
+    </NavigationContainer>)
 }
+

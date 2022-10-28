@@ -8,7 +8,7 @@ export const Drawer = createDrawerNavigator()
 export const DrawerNavigator = () => {
     return (
     <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Quests" useLegacyImplementation >
+        <Drawer.Navigator initialRouteName="Quests" useLegacyImplementation screenOptions={{headerShown: false}}>
             <Drawer.Screen name="Quests" component={QuestsScreen} />
         </Drawer.Navigator>
     </NavigationContainer>)

@@ -1,5 +1,8 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect, useCallback } from 'react';
+
 
 export default function App() {
 
@@ -11,13 +14,26 @@ export default function App() {
     'Inter-Bold': require('./assets/fonts/static/Inter-Bold.ttf'),
   })
 
-  if (!fontsLoaded) {
-    return null
-  }
+  useEffect(() => {
+    const prepare = async () => {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded)
+      await SplashScreen.hideAsync();
+
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded)
+    return null;
+
 
 
   return (
-    <View>
+    <View onLayout={onLayoutRootView}>
 
     </View>
   );

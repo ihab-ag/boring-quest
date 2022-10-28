@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { SafeAreaView, StatusBar, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
@@ -33,8 +33,11 @@ export default function App() {
 
 
   return (
-    <View onLayout={onLayoutRootView}>
 
+    <View onLayout={onLayoutRootView}>
+      <SafeAreaView>
+        <StatusBar backgroundColor='#fff' barStyle='dark-content'/>
+      </SafeAreaView>
     </View>
   );
 }

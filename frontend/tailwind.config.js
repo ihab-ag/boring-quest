@@ -9,12 +9,13 @@ module.exports = {
         'inter-medium': 'Inter-Medium',
         'inter-semibold': 'Inter-SemiBold',
       },
-      colors:{
+      colors: {
         'primary': '#118AB2',
         'secondary': '#073B4C',
-        'easy':'#06D6A0',
-        'medium':'#FFD166',
-        'hard':'#EF476F',
+        'easy': '#06D6A0',
+        'medium': '#FFD166',
+        'hard': '#EF476F',
+        'screen-bg': '#F2F2F2'
       }
     },
   },

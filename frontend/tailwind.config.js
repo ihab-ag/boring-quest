@@ -10,13 +10,14 @@ module.exports = {
         'inter-semibold': 'Inter-SemiBold',
       },
       colors: {
-        'primary': '#118AB2',
-        'secondary': '#073B4C',
         'easy': '#06D6A0',
         'medium': '#FFD166',
         'hard': '#EF476F',
-        'screen-bg': '#F2F2F2'
-      }
+        'primary': '#118AB2',
+        'secondary': '#073B4C',
+        'screen-bg': '#F5F5F5',
+        'passive': '#706D6D',
+      },
     },
   },
   plugins: [],

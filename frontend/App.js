@@ -3,7 +3,8 @@ import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
 import {DrawerNavigator} from './src/navigation/DrawerStack';
-
+import { Provider } from 'react-redux'
+import store from './src/redux/store';
 
 export default function App() {
 
@@ -32,16 +33,15 @@ export default function App() {
     return null;
 
 
-
   return (
-    <>
+    <Provider store={store}>
     <DrawerNavigator />
     <View onLayout={onLayoutRootView}>
       <SafeAreaView>
         <StatusBar backgroundColor='#fff' barStyle='dark-content'/>
       </SafeAreaView>
     </View>
-    </>
+    </Provider>
   );
 }
 

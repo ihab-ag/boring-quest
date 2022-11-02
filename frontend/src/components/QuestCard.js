@@ -7,7 +7,7 @@ const QuestCard = ({ difficulty }) => {
         <TouchableOpacity>
             <View className='border-2 border-primary bg-white px-4 flex-row justify-between mb-4 rounded'>
                 <View className='flex-row'>
-                    <View className={`w-4 bg-${difficulty} h-full`} />
+                    <View className={`w-4 ${difficulty} h-full`} />
                     <View className='justify-center py-2 w-4/5 ml-2'>
                         <Text className='text-primary font-inter-medium text-lg'>Quest Name</Text>
                         <Text numberOfLines={1} className='text-passive font-inter text-xs'>Go buy some fried chicken to feed the crying cat in the corner</Text>

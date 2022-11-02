@@ -9,13 +9,13 @@ const QuestsSection = () => {
         <View className='mt-3 h-72'>
             <View className='mb-4'>
                 <SectionTitleText>Daily</SectionTitleText>
-                <ProgressBar color='easy' />
+                <ProgressBar bg_color='bg-easy' />
             </View>
             <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
-                <QuestCard difficulty='hard' />
-                <QuestCard difficulty='easy' />
-                <QuestCard difficulty='medium' />
-                <QuestCard difficulty='secondary' />
+                <QuestCard difficulty='bg-hard' />
+                <QuestCard difficulty='bg-easy' />
+                <QuestCard difficulty='bg-medium' />
+                <QuestCard difficulty='bg-secondary' />
             </ScrollView>
         </View>
     )

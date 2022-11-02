@@ -23,9 +23,14 @@ export const dateSlice = createSlice({
             state.days = getMonthDays(state.year, state.month)
             state.day = 1
         },
+        incrementYear: state => {
+            state.year+= 1
+            state.days = getMonthDays(state.year, state.month)
+            state.day = 1
+        },
         
     }
 })
 
-export const { setMonth } = dateSlice.actions
+export const { setMonth, incrementYear } = dateSlice.actions
 export default dateSlice.reducer

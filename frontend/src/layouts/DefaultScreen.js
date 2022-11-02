@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const DefaultScreen = ({ children }) => {
     return (
-        <View className='flex-1 bg-screen-bg px-6 pb-5'>
+        <View className='flex-1 bg-screen-bg px-6 pb-1'>
             <ScrollView showsVerticalScrollIndicator={false}>
             {children}
             </ScrollView>

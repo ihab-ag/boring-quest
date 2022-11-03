@@ -7,10 +7,10 @@ import QuestsSections from '../components/QuestsSections'
 const QuestsScreen = ({ navigation, route }) => {
     return (
         <>
-            <CustomHeader navigation={navigation} route={route} />
+            <CustomHeader navigation={navigation} route={route} type='drawer' />
             <QuestsScreenTopSection />
             <QuestsSections />
-            <Floater />
+            <Floater navigation={navigation} />
         </>
     )
 }

@@ -2,10 +2,11 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 
-const FloaterMenuItem = ({ menuItemStyle, children, title }) => {
+const FloaterMenuItem = ({ menuItemStyle, children, title, onPress }) => {
     return (
         <TouchableOpacity
             className='justify-center items-center mb-3'
+            onPress={onPress}
         >
             <Animated.View
                 style={menuItemStyle}

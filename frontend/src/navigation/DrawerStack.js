@@ -1,12 +1,11 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import CustomDrawer from "../components/CustomDrawer";
-import QuestsScreen from "../screens/QuestsScreen";
 import { Octicons } from '@expo/vector-icons';
 import QuestsNavigator from "./QuestsStack";
 
 const screens = {
-    'Quests': QuestsNavigator,
+    'QuestsStack': QuestsNavigator,
 }
 
 export const Drawer = createDrawerNavigator()

@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Entypo } from '@expo/vector-icons';
+import DiamondIconContainer from './DiamondIconContainer';
 
 const QuestCard = ({ difficulty }) => {
     return (
@@ -13,12 +14,10 @@ const QuestCard = ({ difficulty }) => {
                         <Text numberOfLines={1} className='text-passive font-inter text-xs'>Go buy some fried chicken to feed the crying cat in the corner</Text>
                     </View>
                 </View>
-                <View className='justify-center'>
-                    <View className='bg-primary w-6 h-6 rotate-45 justify-center items-center'>
-                        <View className='-rotate-45'>
-                            <Entypo name="dots-three-horizontal" size={18} color="white" />
-                        </View>
-                    </View>
+                <View className='justify-center items-center' style={{}}>
+                    <DiamondIconContainer>
+                        <Entypo name="dots-three-horizontal" size={18} color="white" />
+                    </DiamondIconContainer>
                 </View>
             </View>
         </TouchableOpacity>

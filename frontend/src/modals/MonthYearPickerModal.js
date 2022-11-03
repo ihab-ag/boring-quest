@@ -1,10 +1,10 @@
 import { View, Modal, FlatList } from 'react-native'
 import MONTHS from '../constants/Months';
-import { Item } from './FlatlistPickerItem';
-import ModalHeader from './ModalHeader';
+import { Item } from '../components/FlatlistPickerItem';
+import ModalHeader from '../components/ModalHeader';
 import { useSelector, useDispatch } from 'react-redux'
 import { setMonth, incrementYear, decrementYear } from '../redux/slices/dateSlice';
-import Counter from './Counter';
+import Counter from '../components/Counter';
 import { currentYear } from '../helpers/currentDate';
 
 const MonthYearPickerModal = ({ modalVisible, setModalVisible }) => {

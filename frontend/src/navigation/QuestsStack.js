@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import QuestModal from '../modals/QuestModal'
 import QuestsScreen from '../screens/QuestsScreen'
 
 const screens = {
@@ -6,7 +7,7 @@ const screens = {
 }
 
 const modals = {
-    
+    'New Quest': QuestModal
 }
 
 const QuestsStack = createStackNavigator()
@@ -14,7 +15,7 @@ const QuestsStack = createStackNavigator()
 const QuestsNavigator = () => {
 
     return (
-        <QuestsStack.Navigator screenOptions={{ headerShown: false }}>
+        <QuestsStack.Navigator initialRouteName='Quests' screenOptions={{ headerShown: false }}>
             <QuestsStack.Group>
                 {
                     Object.keys(screens).map((name) => (
@@ -25,7 +26,7 @@ const QuestsNavigator = () => {
             <QuestsStack.Group screenOptions={{ presentation: 'modal' }}>
             {
                     Object.keys(modals).map((name) => (
-                        <QuestsStack.Screen key={name} name={name+'s'} component={screens[name]} />
+                        <QuestsStack.Screen key={name} name={name} component={modals[name]} />
                     ))
                 }
             </QuestsStack.Group>

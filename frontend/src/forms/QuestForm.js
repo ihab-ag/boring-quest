@@ -12,6 +12,7 @@ import DIFFICULTIES from '../constants/QuestDifficulties'
 import DifficultyTab from '../components/DifficultyTab'
 import ErrorText from '../components/ErrorText'
 import questValidationSchema from './validation/questValidation'
+import FullWidthButton from '../components/FullWidthButton'
 
 const QuestForm = () => {
 
@@ -35,6 +36,7 @@ const QuestForm = () => {
                     <View className='flex-1'>
                         <ScrollView>
                             <TopColoredSection color='bg-primary' >
+                                {/* Quest Title */}
                                 <View>
                                     <LabelText color='text-white' title='Quest title' />
                                     <InputText
@@ -44,8 +46,9 @@ const QuestForm = () => {
                                         onBlur={handleBlur('title')}
                                         value={values.title}
                                     />
-                                    <Text className='font-inter-medium text-sm text-hard' >{touched.title && errors.title}</Text>
+                                    <ErrorText text={touched.title && errors.title} />
                                 </View>
+                                {/* Quest Description */}
                                 <View className='mt-2'>
                                     <LabelText color='text-white' title='Quest description' />
                                     <InputText
@@ -55,20 +58,23 @@ const QuestForm = () => {
                                         onBlur={handleBlur('description')}
                                         value={values.desc}
                                     />
-                                    <Text className='font-inter-medium text-sm text-hard' >{touched.description && errors.description}</Text>
+                                    <ErrorText text={touched.description && errors.description} />
                                 </View>
                             </TopColoredSection>
                             <DefaultScreen>
+                                {/* Quest Type */}
                                 <View className='flex-row justify-between items-center mt-4'>
                                     <LabelText title='Quest type' color='text-secondary' />
                                     <DropDown value={values.type} onPress={() => setTypeModalVisible(true)} />
                                 </View>
                                 <ErrorText text={touched.type && errors.type} />
+                                {/* End Date */}
                                 <View className='flex-row justify-between items-center mt-4'>
                                     <LabelText title='End date' color='text-secondary' />
                                     <DropDown value={values.date.toDateString()} onPress={() => setDateModalVisible(true)} />
                                 </View>
                                 <ErrorText text={touched.date && errors.date} />
+                                {/* Difficulties */}
                                 <View className='mt-4' >
                                     <LabelText title='Difficulty' color='text-secondary' />
                                     <View className='flex-row justify-between mt-4'>
@@ -91,9 +97,7 @@ const QuestForm = () => {
                                 </View>
                             </DefaultScreen>
                         </ScrollView>
-                        <TouchableOpacity onPress={handleSubmit} className='p-4 w-full bg-primary items-center justify-center' >
-                            <Text className='font-inter-semibold text-white text-lg'>START QUEST</Text>
-                        </TouchableOpacity>
+                        <FullWidthButton title='START QUEST' onPress={handleSubmit} />
                         {/* modals */}
                         <QuestTypesModal modalVisible={typeModalVisible}
                             setModalVisible={(value) => setTypeModalVisible(value)}

@@ -8,11 +8,11 @@ const CustomHeader = ({ navigation, route, type = '' }) => {
   let action = null
   let icon = null
   // change navigation based on type
-  if (type === 'drawer'){
+  if (type === 'drawer') {
     action = () => navigation.openDrawer()
     icon = (<Feather name="menu" size={34} color="white" />)
   }
-  else if (type === 'modal'){
+  else if (type === 'modal') {
     action = () => navigation.goBack()
     icon = (<AntDesign name="close" size={32} color="white" />)
   }

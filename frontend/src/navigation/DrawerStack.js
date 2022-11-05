@@ -5,7 +5,7 @@ import { Octicons } from '@expo/vector-icons';
 import QuestsNavigator from "./QuestsStack";
 
 const screens = {
-    'QuestsStack': QuestsNavigator,
+    'Quests': QuestsNavigator,
 }
 
 export const Drawer = createDrawerNavigator()

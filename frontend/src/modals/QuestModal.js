@@ -7,7 +7,7 @@ const QuestModal = ({ navigation, route }) => {
     return (
         <>
             <CustomHeader navigation={navigation} route={route} type='modal' />
-            <QuestForm />
+            <QuestForm navigation={navigation} route={route} />
         </>
     )
 }

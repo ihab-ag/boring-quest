@@ -1,13 +1,15 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import AdventureModal from '../modals/AdventureModal'
 import QuestModal from '../modals/QuestModal'
 import QuestsScreen from '../screens/QuestsScreen'
 
 const screens = {
-    'Quests': QuestsScreen,
+    'Quests ': QuestsScreen,
 }
 
 const modals = {
-    'New Quest': QuestModal
+    'New Quest': QuestModal,
+    'New Adventure': AdventureModal,
 }
 
 const QuestsStack = createStackNavigator()

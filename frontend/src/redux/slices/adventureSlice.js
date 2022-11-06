@@ -9,7 +9,7 @@ export const adventureSlice = createSlice({
     initialState,
     reducers: {
         addQuest: (state, action) => {
-            state.quests.push(action.payload)
+            state.quests.push({...action.payload, status: 'delete'})
         },
         emptyQuests: state => {
             state.quests = []

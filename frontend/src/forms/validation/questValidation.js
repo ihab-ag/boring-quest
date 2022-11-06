@@ -13,7 +13,7 @@ const questValidationSchema = yup.object({
     date: yup.date()
     .min(new Date(currentDay -1 )),
     type: yup.string()
-    .oneOf['todo','daily','weekly','monthly'],
+    .oneOf['todo','daily','weekly','monthly','adventure'],
     difficulty:yup.string()
     .oneOf['easy','medium','hard']
 })

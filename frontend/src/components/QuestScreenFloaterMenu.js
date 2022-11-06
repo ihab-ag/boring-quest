@@ -7,11 +7,13 @@ import FloaterMenu from '../layouts/FloaterMenu';
 const QuestScreenFloaterMenu = ({ menuStyle, menuItemStyle, navigation }) => {
 
     const navigateToQuest = () => {
-        navigation.navigate('New Quest')
+        navigation.navigate('New Quest',{
+            type: 'main'
+        })
     }
 
     const navigateToAdventure = () => {
-        navigation.navigate('AdventureModal')
+        navigation.navigate('New Adventure')
     }
 
     return (

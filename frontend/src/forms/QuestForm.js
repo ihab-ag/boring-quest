@@ -13,11 +13,17 @@ import DifficultyTab from '../components/DifficultyTab'
 import ErrorText from '../components/ErrorText'
 import questValidationSchema from './validation/questValidation'
 import FullWidthButton from '../components/FullWidthButton'
+import { useDispatch } from 'react-redux'
+import { addQuest } from '../redux/slices/adventureSlice'
 
-const QuestForm = () => {
+const QuestForm = ({ route, navigation }) => {
 
     const [typeModalVisible, setTypeModalVisible] = useState(false)
     const [dateModalVisible, setDateModalVisible] = useState(false)
+
+    const type = route.params.type
+
+    const dispatch = useDispatch()
 
     return (
         <Formik
@@ -25,12 +31,20 @@ const QuestForm = () => {
                 title: '',
                 description: '',
                 asignee: '',
-                date: new Date(),
-                type: 'todo',
+                date: type === 'main' ? new Date() : '',
+                type: type === 'main' ? 'todo' : 'adventure',
                 difficulty: 'easy',
             }}
             validationSchema={questValidationSchema}
-            onSubmit={values => { console.log(values) }} >
+            onSubmit={(values) => {
+                if (type === 'adventure') {
+                    dispatch(addQuest(values))
+                }
+                else if (type === 'main') {
+                    // api call
+                }
+                navigation.goBack()
+            }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View className='flex-1'>
@@ -46,7 +60,7 @@ const QuestForm = () => {
                                         onBlur={handleBlur('title')}
                                         value={values.title}
                                     />
-                                    <ErrorText text={touched.title && errors.title} />
+                                    {touched.title && errors.title && <ErrorText text={errors.title} />}
                                 </View>
                                 {/* Quest Description */}
                                 <View className='mt-2'>
@@ -58,22 +72,24 @@ const QuestForm = () => {
                                         onBlur={handleBlur('description')}
                                         value={values.desc}
                                     />
-                                    <ErrorText text={touched.description && errors.description} />
+                                    {touched.description && errors.description && <ErrorText text={errors.description} />}
                                 </View>
                             </TopColoredSection>
                             <DefaultScreen>
-                                {/* Quest Type */}
-                                <View className='flex-row justify-between items-center mt-4'>
-                                    <LabelText title='Quest type' color='text-secondary' />
-                                    <DropDown value={values.type} onPress={() => setTypeModalVisible(true)} />
-                                </View>
-                                <ErrorText text={touched.type && errors.type} />
-                                {/* End Date */}
-                                <View className='flex-row justify-between items-center mt-4'>
-                                    <LabelText title='End date' color='text-secondary' />
-                                    <DropDown value={values.date.toDateString()} onPress={() => setDateModalVisible(true)} />
-                                </View>
-                                <ErrorText text={touched.date && errors.date} />
+                                {type === 'main' &&
+                                    (<>
+                                        {/* Quest Type */}
+                                        <View className='flex-row justify-between items-center mt-4'>
+                                            <LabelText title='Quest type' color='text-secondary' />
+                                            <DropDown value={values.type} onPress={() => setTypeModalVisible(true)} />
+                                        </View>
+                                        {/* End Date */}
+
+                                        <View className='flex-row justify-between items-center mt-4'>
+                                            <LabelText title='End date' color='text-secondary' />
+                                            <DropDown value={values.date.toDateString()} onPress={() => setDateModalVisible(true)} />
+                                        </View>
+                                    </>)}
                                 {/* Difficulties */}
                                 <View className='mt-4' >
                                     <LabelText title='Difficulty' color='text-secondary' />
@@ -97,7 +113,9 @@ const QuestForm = () => {
                                 </View>
                             </DefaultScreen>
                         </ScrollView>
-                        <FullWidthButton title='START QUEST' onPress={handleSubmit} />
+                        {/* Submit Button */}
+                        <FullWidthButton title={type == 'adventure' ? 'ADD TO ADVENTURE' : 'START QUEST'} 
+                        onPress={handleSubmit} />
                         {/* modals */}
                         <QuestTypesModal modalVisible={typeModalVisible}
                             setModalVisible={(value) => setTypeModalVisible(value)}

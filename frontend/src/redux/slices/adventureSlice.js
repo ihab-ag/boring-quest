@@ -11,12 +11,14 @@ export const adventureSlice = createSlice({
         addQuest: (state, action) => {
             state.quests.push(action.payload)
         },
-        emptyQuests: state =>{
+        emptyQuests: state => {
             state.quests = []
         },
-        
+        removeQuest: (state, action) => {
+            state.quests = state.quests.filter((quest, index) => index !== action.payload)
+        }
     }
 })
 
-export const { addQuest, emptyQuests } = adventureSlice.actions
+export const { addQuest, emptyQuests, removeQuest } = adventureSlice.actions
 export default adventureSlice.reducer

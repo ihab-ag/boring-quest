@@ -6,7 +6,7 @@ const mapQuests = (quests, onPress) => {
             difficulty={`bg-${quest.difficulty}`}
             title={quest.title}
             description={quest.description}
-            onPress={() => onPress(key, quest.id && quest.id)}
+            onPress={() => onPress(key, quest)}
             status={quest.status}
         />
     ))

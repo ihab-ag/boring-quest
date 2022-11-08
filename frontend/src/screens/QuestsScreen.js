@@ -9,7 +9,7 @@ const QuestsScreen = ({ navigation, route }) => {
         <>
             <CustomHeader navigation={navigation} route={route} type='drawer' />
             <QuestsScreenTopSection />
-            <QuestsSections />
+            <QuestsSections navigation={navigation} />
             <Floater navigation={navigation} />
         </>
     )

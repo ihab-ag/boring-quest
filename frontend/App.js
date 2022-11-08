@@ -2,9 +2,10 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
-import {DrawerNavigator} from './src/navigation/DrawerStack';
+import { DrawerNavigator } from './src/navigation/DrawerStack';
 import { Provider } from 'react-redux'
 import store from './src/redux/store';
+import MessageFloater from './src/components/MessageFloater';
 
 export default function App() {
 
@@ -35,12 +36,13 @@ export default function App() {
 
   return (
     <Provider store={store}>
-    <DrawerNavigator />
-    <View onLayout={onLayoutRootView}>
-      <SafeAreaView>
-        <StatusBar backgroundColor='#fff' barStyle='dark-content'/>
-      </SafeAreaView>
-    </View>
+      <DrawerNavigator />
+      <MessageFloater />
+      <View onLayout={onLayoutRootView}>
+        <SafeAreaView>
+          <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+        </SafeAreaView>
+      </View>
     </Provider>
   );
 }

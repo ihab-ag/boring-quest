@@ -5,7 +5,6 @@ import ModalHeader from '../components/ModalHeader';
 import { useSelector, useDispatch } from 'react-redux'
 import { setMonth, incrementYear, decrementYear } from '../redux/slices/dateSlice';
 import Counter from '../components/Counter';
-import { currentYear } from '../helpers/currentDate';
 import ModalLayout from '../layouts/ModalLayout';
 
 const MonthYearPickerModal = ({ modalVisible, setModalVisible }) => {
@@ -35,8 +34,8 @@ const MonthYearPickerModal = ({ modalVisible, setModalVisible }) => {
             <View className='h-56 bg-white'>
                 <Counter count={year}
                     increment={() => dispatch(incrementYear())}
-                    decrement={() => dispatch(decrementYear())}
-                    decrementCondition={currentYear < year} />
+                    decrement={() => dispatch(decrementYear())} 
+                    />
                 <FlatList
                     data={MONTHS}
                     renderItem={renderItem}

@@ -26,7 +26,6 @@ const Floater = ({navigation}) => {
     const floaterStyle = useAnimatedStyle(() => {
         return {
             transform: [{ rotate: withTiming(rotation.value + 'deg', config) }],
-
         }
     })
     const menuItemStyle = useAnimatedStyle(() => {
@@ -36,6 +35,7 @@ const Floater = ({navigation}) => {
     })
     const menuStyle = useAnimatedStyle(() => {
         return {
+            backgroundColor: '#fff4',
             height: withTiming(height.value, config),
             bottom: withTiming(bottom.value, config),
             opacity: withTiming(opacity.value, { duration: 700 })
@@ -45,7 +45,7 @@ const Floater = ({navigation}) => {
     const toggleMenu = () => {
         // change value depending on rotation value to keep values in sync
         rotation.value = rotation.value === 45 ? -270 : 45
-        height.value = rotation.value === 45 ? DEVICE_HEIGHT : 0
+        height.value = rotation.value === 45 ? DEVICE_HEIGHT * 0.2 : 0
         bottom.value = rotation.value === 45 ? 0 : -40
         opacity.value = rotation.value === 45 ? 1 : 0
     }

@@ -8,6 +8,7 @@ module.exports = {
         'inter-bold': 'Inter-Bold',
         'inter-medium': 'Inter-Medium',
         'inter-semibold': 'Inter-SemiBold',
+        'spaceMono-bold': 'SpaceMono-Bold'
       },
       colors: {
         'easy': '#06D6A0',

@@ -14,28 +14,28 @@ const modals = {
     'New Adventure': AdventureModal,
 }
 
-const QuestsStack = createStackNavigator()
+const QuestsNavigator = createStackNavigator()
 
-const QuestsNavigator = () => {
+const QuestsStack = () => {
 
     return (
-        <QuestsStack.Navigator initialRouteName='Quests' screenOptions={{ headerShown: false }}>
-            <QuestsStack.Group>
+        <QuestsNavigator.Navigator initialRouteName='Quests' screenOptions={{ headerShown: false }}>
+            <QuestsNavigator.Group>
                 {
                     Object.keys(screens).map((name) => (
-                        <QuestsStack.Screen key={name} name={name} component={screens[name]} />
+                        <QuestsNavigator.Screen key={name} name={name} component={screens[name]} />
                     ))
                 }
-            </QuestsStack.Group>
-            <QuestsStack.Group screenOptions={{ presentation: 'modal' }}>
+            </QuestsNavigator.Group>
+            <QuestsNavigator.Group screenOptions={{ presentation: 'modal' }}>
             {
                     Object.keys(modals).map((name) => (
-                        <QuestsStack.Screen key={name} name={name} component={modals[name]} />
+                        <QuestsNavigator.Screen key={name} name={name} component={modals[name]} />
                     ))
                 }
-            </QuestsStack.Group>
-        </QuestsStack.Navigator>
+            </QuestsNavigator.Group>
+        </QuestsNavigator.Navigator>
     )
 }
 
-export default QuestsNavigator
+export default QuestsStack

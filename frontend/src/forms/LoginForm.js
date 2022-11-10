@@ -5,7 +5,7 @@ import InputText from '../components/InputText'
 import Button from '../components/Button'
 import { Formik } from 'formik'
 import CheckBox from '../components/CheckBox'
-import loginValidationSchema from './validation/loginvalidation'
+import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
 
 const LoginForm = ({ navigation }) => {
@@ -46,7 +46,7 @@ const LoginForm = ({ navigation }) => {
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
                         <CheckBox value={rememberMe} setValue={setRememberMe} />
                         <View className='flex-row flex-1 justify-between py-2 mt-2'>
-                            <Button color='bg-secondary' title='SIGNUP' />
+                            <Button color='bg-secondary' title='SIGNUP' onPress={()=> navigation.navigate('Sign Up')} />
                             <View className='w-2' />
                             <Button color='bg-primary' title='LOGIN' onPress={handleSubmit} />
                         </View>

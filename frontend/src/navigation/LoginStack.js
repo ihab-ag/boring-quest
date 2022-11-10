@@ -1,10 +1,16 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { FastField } from 'formik'
+import SignUpModal from '../modals/SignUpModal'
 import LoginScreen from '../screens/LoginScreen'
 
 const LoginNavigator = createStackNavigator()
 
 const screens = {
     'Login': LoginScreen
+}
+
+const modals = {
+    'Sign Up': SignUpModal,
 }
 
 const LoginStack = () => {
@@ -18,7 +24,13 @@ const LoginStack = () => {
                     ))
                 }
             </LoginNavigator.Group>
-
+            <LoginNavigator.Group screenOptions={{ presentation: 'transparentModal' }}>
+                {
+                    Object.keys(modals).map((name) => (
+                        <LoginNavigator.Screen key={name} name={name} component={modals[name]}  />
+                    ))
+                }
+            </LoginNavigator.Group>
         </LoginNavigator.Navigator>
     )
 }

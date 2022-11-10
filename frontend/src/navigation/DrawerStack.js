@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import CustomDrawer from "../components/CustomDrawer";
 import { Octicons } from '@expo/vector-icons';
 import QuestsStack from "./QuestsStack";
+import LoginStack from "./LoginStack";
 
 const screens = {
     'Quests': QuestsStack,
@@ -35,9 +36,12 @@ export const Drawer = () => {
             }}>
             {
                 Object.keys(screens).map((name) => (
-                    <Drawer.Screen key={name} name={name} component={screens[name]} />
+                    <DrawerNavigator.Screen key={name} name={name} component={screens[name]} />
                 ))
             }
+            <DrawerNavigator.Screen component={LoginStack} name='login' options={{
+                drawerItemStyle: { display: 'none' }
+            }} />
         </DrawerNavigator.Navigator>)
 }
 

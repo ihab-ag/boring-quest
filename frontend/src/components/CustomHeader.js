@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -19,12 +19,15 @@ const CustomHeader = ({ navigation, route, type = 'drawer', color = 'bg-primary'
   }
 
   return (
+    <>
     <View className={`flex-row w-full ${color} px-6 py-4 items-center justify-between`}>
       <Text className='font-inter-semibold text-2xl text-white capitalize'>{route.name}</Text>
       <TouchableOpacity onPress={typeProps[type].action}>
         {typeProps[type].icon}
       </TouchableOpacity>
     </View>
+    <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+    </>
   )
 }
 

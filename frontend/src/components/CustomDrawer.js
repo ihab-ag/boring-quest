@@ -17,7 +17,8 @@ const CustomDrawer = (props) => {
                 }
                 icon={() => (
                     <SimpleLineIcons name="logout" size={24} color="#EF476F" />)
-                } />
+                }
+                onPress={() => props.navigation.navigate('login') }/>
         </>
     )
 }

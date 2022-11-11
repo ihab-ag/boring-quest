@@ -1,12 +1,11 @@
 const express = require('express')
+require('dotenv').config()
 
 const app = express()
 
 app.use(express.json())
 
-app.listen(8000, (err)=>{
-    if(err)
-        console.log(err.message)
-    else
-        console.log('app is up and running')
+app.listen(process.env.PORT, (err)=>{
+    if(err) throw err;
+    console.log(`server running on port ${process.env.PORT}`);
 })

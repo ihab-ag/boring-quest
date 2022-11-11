@@ -42,4 +42,7 @@ const questSchema = mongoose.Schema({
 
 const Quest = mongoose.model('Quest', questSchema)
 
-module.exports = Quest
+module.exports = {
+    Quest,
+    questSchema
+}

@@ -10,9 +10,14 @@ const signUp = async (req, res) => {
     try {
         const user = new User()
 
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/mg
+
+        if(!passwordRegex.test(password))
+            throw 'invalid password'
+
         user.name = name
         user.username = username
-        user.password = await bcrypt.hash(password, 10)
+        user.password = await bcrypt.hash(password,10)
         user.type = type
         user.level = 1
         user.exp = 0
@@ -24,7 +29,7 @@ const signUp = async (req, res) => {
         res.json(user)
     }
     catch (error){
-        res.status(400).send(error.message)
+        res.status(400).send(error)
     }
 
 }

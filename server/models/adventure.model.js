@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { questSchema } = require('./quest.model')
 
 const adventureSchema = mongoose.Schema({
     name: {
@@ -17,7 +16,10 @@ const adventureSchema = mongoose.Schema({
         type: Date,
         required: 'due date is required'
     },
-    quests: [questSchema]
+    quests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quest'
+    }]
 })
 
 const Adventure = mongoose.model('Adventure', adventureSchema)

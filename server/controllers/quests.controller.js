@@ -14,8 +14,10 @@ const createQuest = async (req, res) => {
 
     try {
 
-        
+        const due_date = new Date(due)
 
+        if(due_date < current_date)
+            throw 'due date cannot be less than today'
 
         const quest = new Quest()
 

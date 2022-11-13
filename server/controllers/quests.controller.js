@@ -1,5 +1,6 @@
 const Quest = require('../models/quest.model')
 const User = require('../models/user.model')
+const base64toImage = require('../utils/base64toImage')
 
 // create quest
 const createQuest = async (req, res) => {
@@ -43,6 +44,7 @@ const submitQuest = async (req, res) => {
 
     const quest_id = req.params.quest_id
     const user_id = req.id
+    const { base64Image, picture_submitted } = req.body
 
     try {
 
@@ -50,12 +52,20 @@ const submitQuest = async (req, res) => {
 
         const due = new Date(quest.due)
 
-        console.log(quest_id)
-
         const current_date = new Date()
 
         if (due.getTime() < current_date.getTime())
             throw 'cannot submit after due date'
+
+        if (picture_submitted) {
+
+            const path = base64toImage(base64Image, quest_id)
+
+            quest.picture_submitted = true
+
+            quest.picture_url = path
+
+        }
 
         quest.status = 'submitted'
 
@@ -76,5 +86,4 @@ const submitQuest = async (req, res) => {
 module.exports = {
     createQuest,
     submitQuest
-
 }

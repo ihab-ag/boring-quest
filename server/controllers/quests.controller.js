@@ -59,7 +59,8 @@ const submitQuest = async (req, res) => {
 
         const due = new Date(quest.due)
 
-        
+        if(quest.status !== 'in progress' )
+            throw 'invalid submition status'
 
         // check due time
         if (due.getTime() < current_date.getTime())

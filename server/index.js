@@ -9,6 +9,9 @@ app.use(express.json())
 const authRouter = require('./routes/auth.routes')
 app.use('/auth', authRouter)
 
+const questsRouter = require('./routes/quests.routes')
+app.use('/quests', questsRouter)
+
 app.listen(process.env.PORT, (err) => {
     if(err)
         throw err

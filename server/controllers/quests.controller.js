@@ -17,6 +17,7 @@ const createQuest = async (req, res) => {
         quest.type = type
         quest.due = due
         quest.difficulty = difficulty
+        quest.status = 'in progress'
 
         await quest.save()
 

@@ -37,6 +37,10 @@ const questSchema = mongoose.Schema({
     },
     picture_url: {
         type: String
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 

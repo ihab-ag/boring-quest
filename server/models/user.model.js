@@ -26,15 +26,19 @@ const userSchema = mongoose.Schema({
     },
     level: {
         type: Number,
+        default: 1
     },
     exp: {
         type: Number,
+        default: 0
     },
     health: {
         type: Number,
+        default: 1000
     },
     deaths: {
         type: Number,
+        default: 0
     },
     companions: [{
         type: mongoose.Schema.Types.ObjectId,

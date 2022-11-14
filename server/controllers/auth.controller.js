@@ -19,10 +19,6 @@ const signUp = async (req, res) => {
         user.username = username
         user.password = await bcrypt.hash(password, 10)
         user.type = type
-        user.level = 1
-        user.exp = 0
-        user.health = 0
-        user.deaths = 0
 
         await user.save()
 

@@ -90,33 +90,33 @@ const submitQuest = async (req, res) => {
         await quest.save()
 
         const user = await User.findById(user_id).populate('quests')
-        
+
         // handle exp and level
         // gain exp based on difficulty
-        
+
         if (quest.difficulty === 'easy')
-        user.exp += 5
+            user.exp += 5
         else if (quest.difficulty === 'medium')
-        user.exp += 10
+            user.exp += 10
         else if (quest.difficulty === 'hard')
-        user.exp += 20
-        
+            user.exp += 20
+
         // handle level up
         while (user.exp >= (user.level * 5)) {
             let exp_difference = user.exp - (user.level * 5)
             user.level += 1
             user.exp = exp_difference
         }
-        
+
         // recreate quest if its reoccuring (daily, weekly, monthly)
         if (REOCCURING_TYPES.includes(quest.type)) {
 
             const new_quest = new Quest()
-            
+
             const { name, description, type, difficulty } = quest
 
             const iso_date = due.toISOString()
-            
+
             new_quest.name = name
             new_quest.description = description
             new_quest.type = type
@@ -124,7 +124,7 @@ const submitQuest = async (req, res) => {
             new_quest.difficulty = difficulty
             new_quest.status = 'in progress'
             new_quest.creator = user_id
-            
+
             if (type === 'daily') {
                 new_quest.due = incrementDay(iso_date)
             }
@@ -134,7 +134,7 @@ const submitQuest = async (req, res) => {
             else if (type === 'monthly') {
                 new_quest.due = incrementMonth(iso_date)
             }
-            
+
             await new_quest.save()
 
             user.quests = [...user.quests, new_quest]
@@ -162,6 +162,18 @@ const failQuest = async () => {
 
         for (const quest of quests) {
             quest.status = 'failed'
+
+            const user = await User.findById(quest.creator)
+
+            user.health = user.health - 10
+
+            if(user.health === 0){
+                user.deaths += 1
+                user.health = 1000
+            }
+
+            await user.save()
+            
             await quest.save()
         }
 

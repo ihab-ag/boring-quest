@@ -20,6 +20,10 @@ const questsRouter = require('./routes/quests.routes')
 
 app.use('/quests', questsRouter)
 
+const adventuresRouter = require('./routes/adventures.routes')
+
+app.use('/adventures', adventuresRouter)
+
 app.listen(process.env.PORT, (err) => {
     if(err)
         throw err

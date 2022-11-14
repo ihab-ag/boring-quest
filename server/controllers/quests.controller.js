@@ -97,7 +97,7 @@ const submitQuest = async (req, res) => {
             user.exp += 10
         else if (quest.difficulty === 'hard')
             user.exp += 20
-console.log(user.exp)
+
         // handle level up
         while(user.exp >= (user.level * 5)){
             let exp_difference = user.exp - (user.level * 5)
@@ -114,9 +114,30 @@ console.log(user.exp)
         res.status(400).send(error)
     }
 }
+// fail quests over due date
+const failQuest = async () => {
 
+    try{
+        
+        const quests = await Quest.find({
+            'due': {$lt: current_date},
+            'status': 'in progress'})
+
+        for(const quest of quests){
+            quest.status = 'failed'
+            await quest.save()
+        }
+
+        console.log('updated failed quests')
+    }
+    catch(error){
+        console.log("failQuest error: "+ error)
+    }
+    
+}
 
 module.exports = {
     createQuest,
-    submitQuest
+    submitQuest,
+    failQuest
 }

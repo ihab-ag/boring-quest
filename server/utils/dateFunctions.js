@@ -4,6 +4,9 @@ const incrementDay = (date) => {
     return DateTime.fromISO(date).plus({days: 1})
 }
 
+const incrementWeek = (date) => {
+    return DateTime.fromISO(date).plus({weeks: 1})
+}
 
 const incrementMonth = (date) => {
     return DateTime.fromISO(date).plus({months: 1})
@@ -11,5 +14,6 @@ const incrementMonth = (date) => {
 
 module.exports = {
     incrementDay,
-    incrementMonth
+    incrementMonth,
+    incrementWeek
 }

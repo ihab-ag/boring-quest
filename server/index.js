@@ -1,4 +1,5 @@
 const express = require('express')
+const failQuestsScheduler = require('./services/failQuestsScheduler')
 
 require('dotenv').config()
 require('./config/db.config')
@@ -6,10 +7,13 @@ const app = express()
 
 app.use(express.json())
 
+failQuestsScheduler
+
 const authRouter = require('./routes/auth.routes')
 app.use('/auth', authRouter)
 
 const questsRouter = require('./routes/quests.routes')
+
 app.use('/quests', questsRouter)
 
 app.listen(process.env.PORT, (err) => {

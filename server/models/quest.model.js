@@ -29,6 +29,10 @@ const questSchema = mongoose.Schema({
         type: String,
         enum: ['in progress', 'submitted', 'failed']
     },
+    created_on: {
+        type: Date,
+        default: new Date()
+    },
     submitted_on: {
         type: Date,
     },
@@ -41,7 +45,7 @@ const questSchema = mongoose.Schema({
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
 })
 
 const Quest = mongoose.model('Quest', questSchema)

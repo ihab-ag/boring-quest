@@ -3,13 +3,17 @@ const failQuestsScheduler = require('./services/failQuestsScheduler')
 
 require('dotenv').config()
 require('./config/db.config')
+
 const app = express()
 
 app.use(express.json())
 
+// schedulers
 failQuestsScheduler
 
+// routes
 const authRouter = require('./routes/auth.routes')
+
 app.use('/auth', authRouter)
 
 const questsRouter = require('./routes/quests.routes')

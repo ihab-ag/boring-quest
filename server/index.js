@@ -16,6 +16,10 @@ const authRouter = require('./routes/auth.routes')
 
 app.use('/auth', authRouter)
 
+const usersRouter = require('./routes/user.routes')
+
+app.use('/users', usersRouter)
+
 const questsRouter = require('./routes/quests.routes')
 
 app.use('/quests', questsRouter)

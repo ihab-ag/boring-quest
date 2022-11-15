@@ -113,7 +113,25 @@ const deleteFriend = async (req, res) => {
 
 }
 
+
+const searchUsers = async (req, res) => {
+
+    const user_id = req.id
+    const user_type = req.type
+    const username = req.params.username
+
+    const query = {
+        username: { $regex: username },
+        type: user_type === GUILD ? ADVENTURER :  { $regex: '' },
+        _id: { $ne: user_id}
+    }
+    const users = await User.find(query)
+
+    res.json(users)
+}
+
 module.exports = {
     sendOrAcceptInvite,
-    deleteFriend
+    deleteFriend,
+    searchUsers
 }

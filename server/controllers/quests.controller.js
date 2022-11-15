@@ -238,7 +238,7 @@ const failQuest = async () => {
 
                 assignee.save()
             }
-            
+
             await user.save()
 
             await quest.save()
@@ -250,7 +250,6 @@ const failQuest = async () => {
     catch (error) {
         console.log("failQuest error: " + error)
     }
-
 }
 
 module.exports = {

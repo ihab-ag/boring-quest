@@ -36,16 +36,17 @@ const createQuest = async (req, res) => {
 
         if (user_type === 'guild') {
 
+        const assignee = await User.findById(assignee_id)
+
+        if(!assignee.guilds.includes(user_id))
+            throw 'assigned user not a member of guild'
+
             quest.assignee = assignee_id
 
             await quest.save()
 
-            const assignee = await User.findByIdAndUpdate(assignee_id, {
-                $push: {
-                    quests: quest.id
-                }
-            })
-            console.log(assignee_id)
+            assignee.quests = [...assignee.quests, quest.id]
+            
             assignee.save()
         }
         else
@@ -111,7 +112,6 @@ const submitQuest = async (req, res) => {
 
         // handle exp and level
         // gain exp based on difficulty
-
         if (quest.difficulty === 'easy')
             user.exp += 5
         else if (quest.difficulty === 'medium')

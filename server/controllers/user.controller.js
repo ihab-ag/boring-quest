@@ -8,12 +8,12 @@ const sendOrAcceptInvite = async (req, res) => {
     try {
         // retrieve user and invited user from database
         const [user, invited_user] = await Promise.all([
-            User.findById(user_id).exec(), 
+            User.findById(user_id).exec(),
             User.findById(invited_id).exec()
         ])
 
-        if(user.companions.includes(invited_id)){
-            throw 'user already a companion'
+        if (user.companions.includes(invited_id)||invited_user.invites.includes(user_id)) {
+            throw 'user already a companion or invited'
         }
         // check if invited user invited the user
         if (user.invites.includes(invited_id)) {
@@ -27,7 +27,7 @@ const sendOrAcceptInvite = async (req, res) => {
             invited_user.save()
         }
         // send invite to invited user
-        else{
+        else {
             invited_user.invites = [...invited_user.invites, user_id]
 
             invited_user.save()

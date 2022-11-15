@@ -10,9 +10,10 @@ const REOCCURING_TYPES = ['daily', 'weekly', 'monthly']
 // create quest
 const createQuest = async (req, res) => {
 
-    const { name, description, type, due, difficulty } = req.body
+    const { name, description, type, due, difficulty, assignee_id } = req.body
 
     const user_id = req.id
+    const user_type = req.type
 
     try {
 
@@ -31,7 +32,24 @@ const createQuest = async (req, res) => {
         quest.status = 'in progress'
         quest.creator = user_id
 
-        await quest.save()
+        // if user type guild add assignee to quest and quest to assignee
+
+        if (user_type === 'guild') {
+
+            quest.assignee = assignee_id
+
+            await quest.save()
+
+            const assignee = await User.findByIdAndUpdate(assignee_id, {
+                $push: {
+                    quests: quest.id
+                }
+            })
+            console.log(assignee_id)
+            assignee.save()
+        }
+        else
+            await quest.save()
 
         const user = await User.findByIdAndUpdate(user_id, {
             $push: {
@@ -46,7 +64,7 @@ const createQuest = async (req, res) => {
         res.json(user)
     }
     catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error.message)
     }
 }
 
@@ -167,13 +185,13 @@ const failQuest = async () => {
 
             user.health = user.health - 10
 
-            if(user.health === 0){
+            if (user.health === 0) {
                 user.deaths += 1
                 user.health = 1000
             }
 
             await user.save()
-            
+
             await quest.save()
         }
 

@@ -56,11 +56,7 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Adventure'
     }],
-    requests_sent: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
-    requests_recieved: [{
+    invites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }]

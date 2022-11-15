@@ -6,6 +6,6 @@ const router = Router()
 
 router.post('/invites/:invited_id', authMiddleware, sendOrAcceptInvite)
 
-router.delete('/companions/:invited_id', authMiddleware, deleteFriend)
+router.delete('/friends/:deleted_id', authMiddleware, deleteFriend)
 
 module.exports = router

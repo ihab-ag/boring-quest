@@ -36,17 +36,17 @@ const createQuest = async (req, res) => {
 
         if (user_type === 'guild') {
 
-        const assignee = await User.findById(assignee_id)
+            const assignee = await User.findById(assignee_id)
 
-        if(!assignee.guilds.includes(user_id))
-            throw 'assigned user not a member of guild'
+            if (!assignee.guilds.includes(user_id))
+                throw 'assigned user not a member of guild'
 
             quest.assignee = assignee_id
 
             await quest.save()
 
             assignee.quests = [...assignee.quests, quest.id]
-            
+
             assignee.save()
         }
         else
@@ -65,7 +65,7 @@ const createQuest = async (req, res) => {
         res.json(user)
     }
     catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send(error)
     }
 }
 
@@ -75,7 +75,18 @@ const submitQuest = async (req, res) => {
     const quest_id = req.params.quest_id
     const user_id = req.id
     const { base64Image, picture_submitted } = req.body
-
+    let exp_gained
+    let guild
+    let stats_data
+    // handle level up
+    const handleLevelUp = (level, exp) => {
+        while (exp >= (level * 5)) {
+            let exp_difference = exp - (level * 5)
+            level += 1
+            exp = exp_difference
+        }
+        return {level, exp}
+    }
     try {
 
         const quest = await Quest.findById(quest_id)
@@ -113,17 +124,31 @@ const submitQuest = async (req, res) => {
         // handle exp and level
         // gain exp based on difficulty
         if (quest.difficulty === 'easy')
-            user.exp += 5
+            exp_gained = 5
         else if (quest.difficulty === 'medium')
-            user.exp += 10
+            exp_gained = 10
         else if (quest.difficulty === 'hard')
-            user.exp += 20
+            exp_gained = 20
 
-        // handle level up
-        while (user.exp >= (user.level * 5)) {
-            let exp_difference = user.exp - (user.level * 5)
-            user.level += 1
-            user.exp = exp_difference
+        user.exp += exp_gained
+
+        stats_data = handleLevelUp(user.level, user.exp)
+
+        user.level = stats_data.level
+
+        user.exp = stats_data.exp
+
+        if (quest.assignee) {
+
+            guild = await User.findById(quest.creator)
+
+            guild.exp = exp_gained
+
+            stats_data = handleLevelUp(guild.level, guild.exp)
+
+            guild.level = stats_data.level
+
+            guild.exp = stats_data.exp
         }
 
         // recreate quest if its reoccuring (daily, weekly, monthly)
@@ -141,7 +166,9 @@ const submitQuest = async (req, res) => {
             new_quest.created_on = due
             new_quest.difficulty = difficulty
             new_quest.status = 'in progress'
-            new_quest.creator = user_id
+            new_quest.creator = quest.creator
+            if (guild)
+                new_quest.assignee = quest.assignee
 
             if (type === 'daily') {
                 new_quest.due = incrementDay(iso_date)
@@ -155,7 +182,15 @@ const submitQuest = async (req, res) => {
 
             await new_quest.save()
 
+            if (guild) {
+                guild.quests = [...guild.quests, new_quest]
+            }
+
             user.quests = [...user.quests, new_quest]
+        }
+
+        if (guild) {
+            guild.save()
         }
 
         res.json(user)

@@ -73,30 +73,42 @@ const sendOrAcceptInvite = async (req, res) => {
 const deleteFriend = async (req, res) => {
 
     const user_id = req.id
-    const invited_id = req.params.invited_id
+    const deleted_id = req.params.deleted_id
     try {
-        // retrieve user and invited user from database
-        const [user, invited_user] = await Promise.all([
+        // retrieve user and deleted user from database
+        const [user, deleted_user] = await Promise.all([
             User.findById(user_id).exec(),
-            User.findById(invited_id).exec()
+            User.findById(deleted_id).exec()
         ])
 
-        // remove invited user from companions
-        if (user.companions.includes(invited_id)) {
-            user.companions = user.companions.filter(id => id != invited_id)
-            invited_user.companions = invited_user.companions.filter(id => id != user_id)
-
-            user.save()
-            invited_user.save()
+        // remove user from deleted users companions
+        if (user.type === ADVENTURER) {
+            deleted_user.companions = deleted_user.companions.filter(id => id != user_id)
+            if (deleted_user.type === ADVENTURER) {
+                // remove deleted user from users companions
+                user.companions = user.companions.filter(id => id != deleted_id)
+            }
+            else if (deleted_user.type === GUILD) {
+                // remove deleted user from users guilds
+                user.guilds = user.guilds.filter(id => id != deleted_id)
+            }
+        }
+        // remove user from deleted users guilds
+        else if (user.type === GUILD) {
+            deleted_user.guilds = deleted_user.guilds.filter(id => id != user_id)
+            user.companions = user.companions.filter(id => id != deleted_id)
         }
         else {
-            throw 'invited user not found'
+            throw 'deleted user not found'
         }
+
+        user.save()
+        deleted_user.save()
 
         res.json(user)
     }
     catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error.message)
     }
 
 }

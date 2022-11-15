@@ -85,7 +85,7 @@ const submitQuest = async (req, res) => {
             level += 1
             exp = exp_difference
         }
-        return {level, exp}
+        return { level, exp }
     }
     try {
 
@@ -206,6 +206,17 @@ const submitQuest = async (req, res) => {
 // fail quests over due date
 const failQuest = async () => {
 
+    const handleHealth = (health) => {
+        health = health - 10
+
+        if (health === 0) {
+            deaths += 1
+            health = 1000
+        }
+
+        return health
+    }
+
     try {
 
         const quests = await Quest.find({
@@ -218,19 +229,23 @@ const failQuest = async () => {
 
             const user = await User.findById(quest.creator)
 
-            user.health = user.health - 10
+            user.health = handleHealth(user.health)
 
-            if (user.health === 0) {
-                user.deaths += 1
-                user.health = 1000
+            if (user.type === 'guild') {
+                const assignee = await User.findById(quest.assignee)
+
+                assignee.health = handleHealth(assignee.health)
+
+                assignee.save()
             }
-
+            
             await user.save()
 
             await quest.save()
+
+            console.log(quest.id + 'failed')
         }
 
-        console.log('updated failed quests')
     }
     catch (error) {
         console.log("failQuest error: " + error)

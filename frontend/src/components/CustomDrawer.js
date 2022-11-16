@@ -3,8 +3,12 @@ import React from 'react'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { SimpleLineIcons } from '@expo/vector-icons'
 import DrawerTopSection from './DrawerTopSection'
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/slices/authSlice'
 
 const CustomDrawer = (props) => {
+
+    const dispatch = useDispatch()
     return (
         <>
             <DrawerTopSection />
@@ -18,7 +22,7 @@ const CustomDrawer = (props) => {
                 icon={() => (
                     <SimpleLineIcons name="logout" size={24} color="#EF476F" />)
                 }
-                onPress={() => props.navigation.navigate('login') }/>
+                onPress={() => dispatch(logout()) }/>
         </>
     )
 }

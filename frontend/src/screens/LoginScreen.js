@@ -7,16 +7,7 @@ import LoginForm from '../forms/LoginForm'
 import { useEffect } from 'react'
 
 const LoginScreen = ({ navigation, route }) => {
-    
-          useEffect(
-            () => {
-                navigation.addListener('beforeRemove',(e)=>{
-                    e.preventDefault()
-                })
-            }
-          ,[navigation])
-        //   not working note
-          
+
     return (
         <>
             <AnimatedBackground />

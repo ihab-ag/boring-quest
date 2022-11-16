@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import LabelText from '../components/LabelText'
 import InputText from '../components/InputText'
@@ -7,9 +7,28 @@ import { Formik } from 'formik'
 import CheckBox from '../components/CheckBox'
 import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
+import { loginReq } from '../apis/configs/login.api'
+import { useDispatch } from 'react-redux'
+import { login, setToken } from '../redux/slices/authSlice'
+import { setMessage } from '../redux/slices/globalMessageSlice'
 
 const LoginForm = ({ navigation }) => {
+
     const [rememberMe, setRememberMe] = useState(false)
+
+    const dispatch = useDispatch()
+
+    const handleLogin = async (values) => {
+
+        const res = await loginReq(values)
+        if(res.status === 200){
+            dispatch(setToken(res.data.authorisation.token))
+            dispatch(login())
+        }
+        else{
+            dispatch(setMessage('login error'))
+        }
+    }
     return (
         <Formik
             initialValues={{
@@ -18,7 +37,7 @@ const LoginForm = ({ navigation }) => {
             }}
             validationSchema={loginValidationSchema}
             onSubmit={values => {
-                console.log(values)
+                handleLogin(values)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -46,7 +65,7 @@ const LoginForm = ({ navigation }) => {
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
                         <CheckBox value={rememberMe} setValue={setRememberMe} />
                         <View className='flex-row flex-1 justify-between py-2 mt-2'>
-                            <Button color='bg-secondary' title='SIGNUP' onPress={()=> navigation.navigate('Sign Up')} />
+                            <Button color='bg-secondary' title='SIGNUP' onPress={() => navigation.navigate('Sign Up')} />
                             <View className='w-2' />
                             <Button color='bg-primary' title='LOGIN' onPress={handleSubmit} />
                         </View>

@@ -39,9 +39,6 @@ export const Drawer = () => {
                     <DrawerNavigator.Screen key={name} name={name} component={screens[name]} />
                 ))
             }
-            <DrawerNavigator.Screen component={LoginStack} name='login' options={{
-                drawerItemStyle: { display: 'none' }
-            }} />
         </DrawerNavigator.Navigator>)
 }
 

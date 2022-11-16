@@ -8,9 +8,11 @@ import CheckBox from '../components/CheckBox'
 import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
 import { loginReq } from '../apis/configs/login.api'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login, setToken } from '../redux/slices/authSlice'
 import { setMessage } from '../redux/slices/globalMessageSlice'
+import { setUser } from '../redux/slices/userSlice'
+import { destructureUser } from '../helpers/destructureUser'
 
 const LoginForm = ({ navigation }) => {
 
@@ -21,11 +23,13 @@ const LoginForm = ({ navigation }) => {
     const handleLogin = async (values) => {
 
         const res = await loginReq(values)
-        if(res.status === 200){
+        if (res.status === 200) {
             dispatch(setToken(res.data.authorisation.token))
+            const user_data = res.data.user
+            dispatch(setUser(destructureUser(user_data)))
             dispatch(login())
         }
-        else{
+        else {
             dispatch(setMessage('login error'))
         }
     }

@@ -11,3 +11,10 @@ const HEADERS = {
     }
 }
 
+export const axiosPostReq = async (route, data) => {
+    try {
+        return await axios.post(BASE_URL + route, data, HEADERS)
+    } catch (error) {
+        return error;
+    }
+}

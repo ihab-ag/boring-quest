@@ -1,13 +1,12 @@
 import { SafeAreaView, StatusBar, Text, View } from 'react-native'
 import { useFonts } from 'expo-font'
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useCallback } from 'react';
-import { Drawer } from './src/navigation/DrawerStack';
+import * as SplashScreen from 'expo-splash-screen'
+import { useEffect, useCallback } from 'react'
 import { Provider } from 'react-redux'
-import store from './src/redux/store';
-import MessageFloater from './src/components/MessageFloater';
-import LoginStack from './src/navigation/LoginStack';
-import { NavigationContainer } from '@react-navigation/native';
+import store from './src/redux/store'
+import MessageFloater from './src/components/MessageFloater'
+import { NavigationContainer } from '@react-navigation/native'
+import StackSwitcher from './src/components/StackSwitcher'
 
 export default function App() {
 
@@ -36,13 +35,11 @@ export default function App() {
   if (!fontsLoaded)
     return null;
 
-
   return (
     <Provider store={store}>
       <NavigationContainer>
-        {/* <Drawer /> */}
-        <LoginStack />
-        {/* <MessageFloater /> */}
+        <StackSwitcher />
+        <MessageFloater />
         <View onLayout={onLayoutRootView}>
           <SafeAreaView>
             {/* <StatusBar backgroundColor='#fff' barStyle='dark-content' /> */}

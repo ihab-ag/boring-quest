@@ -4,7 +4,7 @@ import adventureReducer from './slices/adventureSlice'
 import globalMessageReducer from './slices/globalMessageSlice'
 import authReducer from './slices/authSlice'
 
-export default configureStore({
+export default store = configureStore({
     reducer: {
         date: dateReducer,
         adventure: adventureReducer,

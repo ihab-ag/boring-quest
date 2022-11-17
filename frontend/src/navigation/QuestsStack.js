@@ -6,12 +6,12 @@ import QuestsScreen from '../screens/QuestsScreen'
 
 const screens = {
     'Quests ': QuestsScreen,
-    'Quest' : QuestScreen
 }
 
 const modals = {
     'New Quest': QuestModal,
     'New Adventure': AdventureModal,
+    'Quest' : QuestScreen
 }
 
 const QuestsNavigator = createStackNavigator()

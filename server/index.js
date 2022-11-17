@@ -7,7 +7,7 @@ require('./config/db.config')
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json({limit: '500mb'}))
 app.use(cors())
 
 // schedulers

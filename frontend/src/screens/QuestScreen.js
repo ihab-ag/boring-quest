@@ -14,7 +14,10 @@ const QuestScreen = ({ navigation, route }) => {
 
     const quest = route.params.quest
 
-    route.name = quest.title
+    const due_date = new Date(quest.due).toDateString()
+    route.name = quest.name
+
+    
 
     return (
         <>
@@ -25,7 +28,7 @@ const QuestScreen = ({ navigation, route }) => {
             <DefaultScreen>
                 <View className='mt-4 flex-row justify-between items-center'>
                     <Text className='font-inter-semibold text-secondary text-xl'>Due:</Text>
-                    <Text className='font-inter-medium text-secondary text-base'>{quest.date.toDateString()}</Text>
+                    <Text className='font-inter-medium text-secondary text-base'>{due_date}</Text>
                 </View>
                 <View className='mt-4 flex-row justify-between items-start'>
                     <Text className='font-inter-semibold text-secondary text-xl'>Submission:</Text>

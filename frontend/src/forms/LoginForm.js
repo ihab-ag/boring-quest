@@ -13,6 +13,7 @@ import { login, setToken } from '../redux/slices/authSlice'
 import { setMessage } from '../redux/slices/globalMessageSlice'
 import { setUser } from '../redux/slices/userSlice'
 import { destructureUser } from '../helpers/destructureUser'
+import { setQuests } from '../redux/slices/questsSlice'
 
 const LoginForm = ({ navigation }) => {
 
@@ -25,8 +26,13 @@ const LoginForm = ({ navigation }) => {
         const res = await loginReq(values)
         if (res.status === 200) {
             dispatch(setToken(res.data.authorisation.token))
+
             const user_data = res.data.user
+
             dispatch(setUser(destructureUser(user_data)))
+
+            dispatch(setQuests(user_data.quests))
+
             dispatch(login())
         }
         else {

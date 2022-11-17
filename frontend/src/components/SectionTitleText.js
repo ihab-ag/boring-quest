@@ -3,7 +3,7 @@ import React from 'react'
 
 const SectionTitleText = ({children}) => {
   return (
-    <Text className='font-inter-semibold text-2xl text-secondary '>{children}</Text>
+    <Text className='font-inter-semibold text-2xl text-secondary capitalize'>{children}</Text>
   )
 }
 

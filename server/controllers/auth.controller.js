@@ -36,7 +36,7 @@ const login = async (req, res) => {
 
     try {
 
-        const user = await User.findOne({ username }).select("+password");
+        const user = await User.findOne({ username }).select("+password").populate(['guilds', 'quests', 'companions', 'adventures', 'invites'])
 
         if (!user)
             throw "Invalid Credentials";
@@ -54,6 +54,9 @@ const login = async (req, res) => {
             expiresIn: '12h'
         });
 
+        // hide password
+        user.password = ""
+
         return res.json({
             authorisation: {
                 token: token,
@@ -62,7 +65,7 @@ const login = async (req, res) => {
             user
         })
     }
-    catch (error){
+    catch (error) {
         res.status(400).send(error)
     }
 }

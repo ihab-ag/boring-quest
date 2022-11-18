@@ -24,7 +24,7 @@ const createAdventure = async (req, res) => {
             new_quest.due = due
             new_quest.creator = user_id
             new_quest.type = 'adventure'
-            quest.status = 'in progress'
+            new_quest.status = 'in progress'
 
             await new_quest.save()
 
@@ -40,22 +40,16 @@ const createAdventure = async (req, res) => {
             }
         }, {
             new: true
-        }).populate([{
-            path: 'adventures',
-            populate: {
-                path: 'quests'
-            }
-        },
-            'quests'])
+        })
 
         user.save()
 
-        res.json(user)
+        res.json(adventure)
 
     }
     catch (error) {
 
-        res.status(400).send(error)
+        res.status(400).send(error.message)
     }
 }
 

@@ -36,7 +36,7 @@ const login = async (req, res) => {
 
     try {
 
-        const user = await User.findOne({ username }).select("+password").populate(['guilds', 'quests', 'companions', 'adventures', 'invites'])
+        const user = await User.findOne({ username }).select("+password").populate(['guilds', 'quests', 'companions', {path:'adventures', populate: 'quests'}, 'invites'])
 
         if (!user)
             throw "Invalid Credentials";

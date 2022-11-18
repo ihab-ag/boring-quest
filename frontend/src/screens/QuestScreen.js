@@ -6,6 +6,11 @@ import DefaultScreen from '../layouts/DefaultScreen'
 import { useState } from 'react'
 import MyCamera from '../components/Camera'
 import { Feather } from '@expo/vector-icons';
+import FullWidthButton from '../components/FullWidthButton'
+import { putSubmit } from '../apis/putSubmit.api'
+import { useDispatch } from 'react-redux'
+import { setFetchedQuest } from '../redux/slices/questsSlice'
+import mapQuests from '../helpers/mapQuests'
 
 const QuestScreen = ({ navigation, route }) => {
 
@@ -16,13 +21,25 @@ const QuestScreen = ({ navigation, route }) => {
 
     const due_date = new Date(quest.due).toDateString()
     route.name = quest.name
+    // const url = `../../../server/${quest.picture_url}`
+    // console.log(url)
+    const dispatch = useDispatch()
+    console.log(quest)
+    const handleSubmit = async () => {
+        const res = await putSubmit(quest._id, {
+            "picture_submitted": true,
+            "base64Image": photo.base64
+        })
+        if(res.status === 200){
+            dispatch(setFetchedQuest(res.data))
+        }
+    }
 
-    
 
     return (
         <>
-            <CustomHeader navigation={navigation} route={route} type='modal' color={`bg-${quest.difficulty}`} />
-            <TopColoredSection color={`bg-${quest.difficulty}`}>
+            <CustomHeader navigation={navigation} route={route} type='modal' color={`bg-secondary bg-${quest.difficulty}`} />
+            <TopColoredSection color={`bg-secondary bg-${quest.difficulty}`}>
                 <Text className='font-inter-medium text-white/90 text-lg'>{quest.description}</Text>
             </TopColoredSection>
             <DefaultScreen>
@@ -30,22 +47,39 @@ const QuestScreen = ({ navigation, route }) => {
                     <Text className='font-inter-semibold text-secondary text-xl'>Due:</Text>
                     <Text className='font-inter-medium text-secondary text-base'>{due_date}</Text>
                 </View>
-                <View className='mt-4 flex-row justify-between items-start'>
+                { quest.status === 'in progress' && <View className='mt-4 flex-row justify-between items-start'>
                     <Text className='font-inter-semibold text-secondary text-xl'>Submission:</Text>
                     <View className='gap-y-4'>
-                    <TouchableOpacity onPress={() => setCameraVisible(true)}>
-                        <Feather name="camera" size={24} color="#073B4C" />
-                    </TouchableOpacity>
-                    
+                        <TouchableOpacity onPress={() => setCameraVisible(true)}>
+                            <Feather name="camera" size={24} color="#073B4C" />
+                        </TouchableOpacity>
+
                     </View>
-                </View>
+                </View>}
                 {photo && (
                     <View className='border-2 border-primary mt-4'>
                         <Image className='align-super h-96' source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
                     </View>
                 )}
+                {
+                quest.picture_url && (
+                    <View className='border-2 border-primary mt-4'>
+                        <Image className='align-super h-96' source={{uri:'http://192.168.44.177:8000/63772f3ff37e1ef328f84e0d.jpg'}
+                    } />
+                    </View>
+                )}
+                {
+                    quest.quests && (
+                        <View>
+                        {mapQuests(quest.quests, (key, quest) => {
+                            navigation.navigate('Quest', { quest })
+                        })}
+                        </View>
+                    )
+                }
             </DefaultScreen>
-            {cameraVisibile && 
+            <FullWidthButton title='SUBMIT' onPress={handleSubmit} />
+            {cameraVisibile &&
                 <MyCamera setPhoto={setPhoto} setVisible={setCameraVisible} />
             }
         </>

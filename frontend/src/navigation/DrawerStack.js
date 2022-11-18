@@ -4,9 +4,11 @@ import CustomDrawer from "../components/CustomDrawer";
 import { Octicons } from '@expo/vector-icons';
 import QuestsStack from "./QuestsStack";
 import LoginStack from "./LoginStack";
+import StatisticsStack from "./StatisticsStack";
 
 const screens = {
     'Quests': QuestsStack,
+    'Statistics': StatisticsStack,
 }
 
 export const DrawerNavigator = createDrawerNavigator()

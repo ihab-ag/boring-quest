@@ -15,6 +15,8 @@ import DateModal from '../modals/DateModal'
 import { emptyQuests, removeQuest } from '../redux/slices/adventureSlice'
 import adventureValidationSchema from './validation/adventureValidation'
 import mapQuests from '../helpers/mapQuests'
+import { postAdventure } from '../apis/postAdventure'
+import { setFetchedQuest } from '../redux/slices/questsSlice'
 
 const AdventureForm = ({ navigation }) => {
 
@@ -22,23 +24,28 @@ const AdventureForm = ({ navigation }) => {
 
     const questsArray = useSelector(state => state.adventure.quests)
     const dispatch = useDispatch()
-
+    
     useEffect(() => {
         dispatch(emptyQuests())
     }, [])
-
+    const handlePost= async(values)=>{
+        const res = await postAdventure(values)
+        if(res.status === 200){
+            dispatch(setFetchedQuest(res.data))
+        }
+    }
     return (
         <Formik
             initialValues={{
-                title: '',
+                name: '',
                 description: '',
-                date: new Date(),
+                due: new Date(),
                 quests: []
             }}
             validationSchema={adventureValidationSchema}
             onSubmit={values => {
-                console.log(values)
-                navigation.goBack()
+                handlePost(values)
+                // navigation.goBack()
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -51,11 +58,11 @@ const AdventureForm = ({ navigation }) => {
                                     <InputText
                                         placeholder='Conquer the land of the fallen'
                                         numberOfLines={1}
-                                        onChangeText={handleChange('title')}
-                                        onBlur={handleBlur('title')}
-                                        value={values.title}
+                                        onChangeText={handleChange('name')}
+                                        onBlur={handleBlur('name')}
+                                        value={values.name}
                                     />
-                                    {touched.title && errors.title && <ErrorText text={errors.title} />}
+                                    {touched.name && errors.name && <ErrorText text={errors.name} />}
                                 </View>
                                 <View className='mt-2'>
                                     <LabelText color='text-white' title='Adventure description' />
@@ -81,7 +88,7 @@ const AdventureForm = ({ navigation }) => {
                                 {/* End Date */}
                                 <View className='flex-row justify-between items-center mt-4'>
                                     <LabelText title='End date' color='text-secondary' />
-                                    <DropDown value={values.date.toDateString()} onPress={() => setDateModalVisible(true)} />
+                                    <DropDown value={values.due.toDateString()} onPress={() => setDateModalVisible(true)} />
                                 </View>
                                 {/* Quests */}
                                 <View className='mt-4'>
@@ -107,7 +114,7 @@ const AdventureForm = ({ navigation }) => {
                             modalVisible={dateModalVisible}
                             setModalVisible={setDateModalVisible}
                             setFieldValue={setFieldValue}
-                            date={values.date} />)}
+                            due={values.due} />)}
                     </View>
                 </TouchableWithoutFeedback>
             )}

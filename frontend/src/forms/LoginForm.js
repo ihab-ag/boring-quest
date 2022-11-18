@@ -7,7 +7,7 @@ import { Formik } from 'formik'
 import CheckBox from '../components/CheckBox'
 import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
-import { loginReq } from '../apis/configs/login.api'
+import { loginReq } from '../apis/login.api'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, setToken } from '../redux/slices/authSlice'
 import { setMessage } from '../redux/slices/globalMessageSlice'
@@ -31,7 +31,7 @@ const LoginForm = ({ navigation }) => {
 
             dispatch(setUser(destructureUser(user_data)))
 
-            dispatch(setQuests(user_data.quests))
+            dispatch(setQuests([...user_data.quests,...user_data.adventures]))
 
             dispatch(login())
         }
@@ -47,6 +47,7 @@ const LoginForm = ({ navigation }) => {
             }}
             validationSchema={loginValidationSchema}
             onSubmit={values => {
+                console.log(values)
                 handleLogin(values)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import TopColoredSection from '../layouts/TopColoredSection'
 import { Formik } from 'formik'
@@ -15,6 +15,8 @@ import questValidationSchema from './validation/questValidation'
 import FullWidthButton from '../components/FullWidthButton'
 import { useDispatch } from 'react-redux'
 import { addQuest } from '../redux/slices/adventureSlice'
+import { postQuest } from '../apis/postQuest.api'
+import { setFetchedQuest } from '../redux/slices/questsSlice'
 
 const QuestForm = ({ route, navigation }) => {
 
@@ -25,23 +27,30 @@ const QuestForm = ({ route, navigation }) => {
 
     const dispatch = useDispatch()
 
+    const handlePost = async (values) => {
+        const res = await postQuest(values)
+        if(res.status === 200){
+            dispatch(setFetchedQuest(res.data))
+        }
+    }
+
     return (
         <Formik
             initialValues={{
-                title: '',
+                name: '',
                 description: '',
-                asignee: '',
-                date: type === 'main' ? new Date() : '',
+                asignee: '-',
+                due: type === 'main' ? new Date() : '',
                 type: type === 'main' ? 'todo' : 'adventure',
                 difficulty: 'easy',
             }}
             validationSchema={questValidationSchema}
-            onSubmit={(values) => {
+            onSubmit={async (values) => {
                 if (type === 'adventure') {
                     dispatch(addQuest(values))
                 }
                 else if (type === 'main') {
-                    // api call
+                    await handlePost(values)
                 }
                 navigation.goBack()
             }} >
@@ -56,11 +65,11 @@ const QuestForm = ({ route, navigation }) => {
                                     <InputText
                                         placeholder='Gather loot'
                                         numberOfLines={1}
-                                        onChangeText={handleChange('title')}
-                                        onBlur={handleBlur('title')}
-                                        value={values.title}
+                                        onChangeText={handleChange('name')}
+                                        onBlur={handleBlur('name')}
+                                        value={values.name}
                                     />
-                                    {touched.title && errors.title && <ErrorText text={errors.title} />}
+                                    {touched.name && errors.name && <ErrorText text={errors.name} />}
                                 </View>
                                 {/* Quest Description */}
                                 <View className='mt-2'>
@@ -87,7 +96,7 @@ const QuestForm = ({ route, navigation }) => {
 
                                         <View className='flex-row justify-between items-center mt-4'>
                                             <LabelText title='End date' color='text-secondary' />
-                                            <DropDown value={values.date.toDateString()} onPress={() => setDateModalVisible(true)} />
+                                            <DropDown value={values.due.toDateString()} onPress={() => setDateModalVisible(true)} />
                                         </View>
                                     </>)}
                                 {/* Difficulties */}
@@ -114,8 +123,8 @@ const QuestForm = ({ route, navigation }) => {
                             </DefaultScreen>
                         </ScrollView>
                         {/* Submit Button */}
-                        <FullWidthButton title={type == 'adventure' ? 'ADD TO ADVENTURE' : 'START QUEST'} 
-                        onPress={handleSubmit} />
+                        <FullWidthButton title={type == 'adventure' ? 'ADD TO ADVENTURE' : 'START QUEST'}
+                            onPress={handleSubmit} />
                         {/* modals */}
                         <QuestTypesModal modalVisible={typeModalVisible}
                             setModalVisible={(value) => setTypeModalVisible(value)}
@@ -126,7 +135,7 @@ const QuestForm = ({ route, navigation }) => {
                             modalVisible={dateModalVisible}
                             setModalVisible={setDateModalVisible}
                             setFieldValue={setFieldValue}
-                            date={values.date} />)}
+                            due={values.due} />)}
 
                     </View>
                 </TouchableWithoutFeedback>

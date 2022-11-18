@@ -19,7 +19,11 @@ const adventureSchema = mongoose.Schema({
     quests: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quest'
-    }]
+    }],
+    created_on: {
+        type: Date,
+        default: new Date()
+    }
 })
 
 const Adventure = mongoose.model('Adventure', adventureSchema)

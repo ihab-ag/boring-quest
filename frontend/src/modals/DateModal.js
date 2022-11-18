@@ -1,16 +1,16 @@
 import { Platform } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-const DateModal = ({ setModalVisible, setFieldValue, date }) => {
+const DateModal = ({ setModalVisible, setFieldValue, due }) => {
 
     const onChange = (event, selectedDate) => {
         setModalVisible(Platform.OS === 'ios')
-        setFieldValue('date', selectedDate)
+        setFieldValue('due', selectedDate)
     }
 
     return (
         <DateTimePicker
-            value={date}
+            value={due}
             mode='date'
             onChange={onChange}
             minimumDate={new Date()}

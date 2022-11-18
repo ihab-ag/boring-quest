@@ -18,7 +18,7 @@ const createQuest = async (req, res) => {
     try {
 
         const due_date = new Date(due)
-
+        
         if (due_date < current_date)
             throw 'due date cannot be less than today'
 
@@ -62,7 +62,7 @@ const createQuest = async (req, res) => {
 
         user.save()
 
-        res.json(user)
+        res.json(quest)
     }
     catch (error) {
         res.status(400).send(error)
@@ -193,7 +193,7 @@ const submitQuest = async (req, res) => {
             guild.save()
         }
 
-        res.json(user)
+        res.json(quest)
 
         user.save()
 

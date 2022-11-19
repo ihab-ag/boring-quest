@@ -10,6 +10,8 @@ const app = express()
 app.use(express.json({limit: '500mb'}))
 app.use(cors())
 
+app.use(express.static('public'))
+
 // schedulers
 failQuestsScheduler
 

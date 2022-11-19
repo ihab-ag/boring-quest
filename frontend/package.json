@@ -20,6 +20,7 @@
     "expo": "~46.0.16",
     "expo-camera": "~12.3.0",
     "expo-font": "~10.2.0",
+    "expo-notifications": "^0.17.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
     "formik": "^2.2.9",

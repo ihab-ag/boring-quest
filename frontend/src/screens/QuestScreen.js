@@ -8,7 +8,7 @@ import MyCamera from '../components/Camera'
 import { Feather } from '@expo/vector-icons';
 import FullWidthButton from '../components/FullWidthButton'
 import { putSubmit } from '../apis/putSubmit.api'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addQuest } from '../redux/slices/questsSlice'
 import mapQuests from '../helpers/mapQuests'
 import { setUser } from '../redux/slices/userSlice'
@@ -18,6 +18,8 @@ const QuestScreen = ({ navigation, route }) => {
 
     const [cameraVisibile, setCameraVisible] = useState(false)
     const [photo, setPhoto] = useState()
+
+    const user = useSelector(state => state.user)
 
     const quest = route.params.quest
 
@@ -52,7 +54,7 @@ const QuestScreen = ({ navigation, route }) => {
                     <Text className='font-inter-semibold text-secondary text-xl'>Due:</Text>
                     <Text className='font-inter-medium text-secondary text-base'>{due_date}</Text>
                 </View>
-                {quest.status === 'in progress' && <View className='mt-4 flex-row justify-between items-start'>
+                {user.type !== 'guild' && quest.status === 'in progress' && <View className='mt-4 flex-row justify-between items-start'>
                     <Text className='font-inter-semibold text-secondary text-xl'>Submission:</Text>
                     <View className='gap-y-4'>
                         <TouchableOpacity onPress={() => setCameraVisible(true)}>
@@ -84,7 +86,7 @@ const QuestScreen = ({ navigation, route }) => {
                     )
                 }
             </DefaultScreen>
-            {quest.status === 'in progress' &&
+            {user.type !== 'guild' && quest.status === 'in progress' &&
 
                 <FullWidthButton title='SUBMIT' onPress={handleSubmit} />}
             {cameraVisibile &&

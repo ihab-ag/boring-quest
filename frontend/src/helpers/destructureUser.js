@@ -7,6 +7,8 @@ export const destructureUser = (user_data) => {
         level: user_data.level,
         exp: user_data.exp,
         deaths: user_data.deaths,
-        health: user_data.health
+        health: user_data.health,
+        guilds: user_data.guilds,
+        companions: user_data.companions
     }
 }

@@ -16,7 +16,7 @@ import { emptyQuests, removeQuest } from '../redux/slices/adventureSlice'
 import adventureValidationSchema from './validation/adventureValidation'
 import mapQuests from '../helpers/mapQuests'
 import { postAdventure } from '../apis/postAdventure'
-import { setFetchedQuest } from '../redux/slices/questsSlice'
+import { addQuest } from '../redux/slices/questsSlice'
 
 const AdventureForm = ({ navigation }) => {
 
@@ -30,8 +30,10 @@ const AdventureForm = ({ navigation }) => {
     }, [])
     const handlePost= async(values)=>{
         const res = await postAdventure(values)
+        
         if(res.status === 200){
-            dispatch(setFetchedQuest(res.data))
+            dispatch(addQuest(res.data))
+            navigation.goBack()
         }
     }
     return (
@@ -45,7 +47,6 @@ const AdventureForm = ({ navigation }) => {
             validationSchema={adventureValidationSchema}
             onSubmit={values => {
                 handlePost(values)
-                // navigation.goBack()
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -106,7 +107,6 @@ const AdventureForm = ({ navigation }) => {
                         </ScrollView>
                         <FullWidthButton onPress={() => {
                             setFieldValue('quests', questsArray)
-                            dispatch(emptyQuests())
                             handleSubmit()
                         }} title={'START ADVENTURE'} />
                         {/* modals */}

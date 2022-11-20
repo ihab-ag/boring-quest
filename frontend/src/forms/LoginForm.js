@@ -15,8 +15,10 @@ import { setUser } from '../redux/slices/userSlice'
 import { destructureUser } from '../helpers/destructureUser'
 import { setQuests } from '../redux/slices/questsSlice'
 import { mapQuestsToDays } from '../helpers/mapQuestToDays'
+import * as SecureStore from 'expo-secure-store';
 
 const LoginForm = ({ navigation }) => {
+
 
     const [rememberMe, setRememberMe] = useState(false)
 
@@ -25,8 +27,9 @@ const LoginForm = ({ navigation }) => {
     const handleLogin = async (values) => {
 
         const res = await loginReq(values)
+        
         if (res.status === 200) {
-            dispatch(setToken(res.data.authorisation.token))
+            await SecureStore.setItemAsync('TOKEN', res.data.authorisation.token);
 
             const user_data = res.data.user
 

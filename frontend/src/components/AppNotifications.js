@@ -7,32 +7,32 @@ Notifications.setNotificationHandler({
       shouldShowAlert: true
     }),
   })
-  
+
 const AppNotifications = () => {
 
 
     async function registerForPushNotificationsAsync() {
         let token;
 
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        let finalStatus = existingStatus;
+        const { status: existingStatus } = await Notifications.getPermissionsAsync()
+        let finalStatus = existingStatus
 
         if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
+            const { status } = await Notifications.requestPermissionsAsync()
+            finalStatus = status
         }
         if (finalStatus !== 'granted') {
-            alert('Failed to get push token for push notification!');
-            return;
+            alert('Failed to get push token for push notification!')
+            return
         }
-        token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
+        token = (await Notifications.getExpoPushTokenAsync()).data
+        console.log(token)
 
-        return token;
+        return token
     }
         useEffect(() => {
-            registerForPushNotificationsAsync();
-        }, []);
+            registerForPushNotificationsAsync()
+        }, [])
         return (
             <></>
         )

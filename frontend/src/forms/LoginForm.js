@@ -14,6 +14,7 @@ import { setMessage } from '../redux/slices/globalMessageSlice'
 import { setUser } from '../redux/slices/userSlice'
 import { destructureUser } from '../helpers/destructureUser'
 import { setQuests } from '../redux/slices/questsSlice'
+import { mapQuestsToDays } from '../helpers/mapQuestToDays'
 
 const LoginForm = ({ navigation }) => {
 
@@ -31,7 +32,10 @@ const LoginForm = ({ navigation }) => {
 
             dispatch(setUser(destructureUser(user_data)))
 
-            dispatch(setQuests([...user_data.quests,...user_data.adventures]))
+            let quests_map = mapQuestsToDays({}, user_data.quests)
+            quests_map = mapQuestsToDays(quests_map, user_data.adventures)
+
+            dispatch(setQuests(quests_map))
 
             dispatch(login())
         }
@@ -56,22 +60,22 @@ const LoginForm = ({ navigation }) => {
                         <View className='py-2 mt-2'>
                             <LabelText title='Username' color='text-primary' />
                             <InputText
-                                placeholder='Username'
                                 numberOfLines={1}
                                 onChangeText={handleChange('username')}
                                 onBlur={handleBlur('username')}
-                                value={values.username} />
+                                value={values.username}
+                                login={true} />
                         </View>
                         {touched.username && errors.username && <ErrorText text={errors.username} />}
                         <View className='py-2'>
                             <LabelText title='Password' color='text-primary' />
                             <InputText
-                                placeholder='Password'
                                 numberOfLines={1}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
-                                password={true} />
+                                password={true}
+                                login={true} />
                         </View>
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
                         <CheckBox value={rememberMe} setValue={setRememberMe} />

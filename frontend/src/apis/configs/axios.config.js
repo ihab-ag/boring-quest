@@ -1,28 +1,30 @@
 import axios from "axios"
-import store from "../../redux/store"
+import * as SecureStore from 'expo-secure-store'
 
-const BASE_URL = 'http://192.168.44.177:8000/'
+export const BASE_URL = 'http://192.168.1.102:8000/'
 
-export const TOKEN = store.getState().auth.token
-
-const HEADERS = {
-    headers: {
-        'Authorization': `Bearer ${TOKEN}`
-    }
-}
-console.log(HEADERS)
 
 export const axiosPostReq = async (route, data) => {
+    const TOKEN = await SecureStore.getItemAsync('TOKEN') || null
     try {
-        return await axios.post(BASE_URL + route, data, HEADERS)
+        return await axios.post(BASE_URL + route, data, {
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`
+            }
+        })
     } catch (error) {
         return error
     }
 }
 
 export const axiosPutReq = async (route, data) => {
+    const TOKEN = await SecureStore.getItemAsync('TOKEN') || null
     try {
-        return await axios.put(BASE_URL + route, data, HEADERS)
+        return await axios.put(BASE_URL + route, data, {
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`
+            }
+        })
     } catch (error) {
         return error
     }

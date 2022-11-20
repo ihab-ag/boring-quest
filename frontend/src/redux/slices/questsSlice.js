@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { mapQuestToDays } from '../../helpers/mapQuestToDays'
 
 const initialState = {
     fetched: null
@@ -8,13 +9,13 @@ export const questsSlice = createSlice({
     initialState: {},
     reducers: {
         setQuests: (state, action) => {
-            state.array = action.payload
+            state.map = action.payload
         },
-        setFetchedQuest: (state, action) => {
-            state.array = [...state.array,action.payload]
+        addQuest: (state, action) => {
+            state.map = mapQuestToDays(state.map, action.payload)
         }
     }
 })
 
-export const { setQuests, setFetchedQuest } = questsSlice.actions
+export const { setQuests, addQuest, } = questsSlice.actions
 export default questsSlice.reducer

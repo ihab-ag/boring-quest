@@ -14,9 +14,9 @@ import ErrorText from '../components/ErrorText'
 import questValidationSchema from './validation/questValidation'
 import FullWidthButton from '../components/FullWidthButton'
 import { useDispatch } from 'react-redux'
-import { addQuest } from '../redux/slices/adventureSlice'
 import { postQuest } from '../apis/postQuest.api'
-import { setFetchedQuest } from '../redux/slices/questsSlice'
+import { addQuest } from '../redux/slices/questsSlice'
+import { addAdventureQuest } from '../redux/slices/adventureSlice'
 
 const QuestForm = ({ route, navigation }) => {
 
@@ -28,9 +28,11 @@ const QuestForm = ({ route, navigation }) => {
     const dispatch = useDispatch()
 
     const handlePost = async (values) => {
+
         const res = await postQuest(values)
-        if(res.status === 200){
-            dispatch(setFetchedQuest(res.data))
+
+        if (res.status === 200) {
+            dispatch(addQuest(res.data))
         }
     }
 
@@ -47,11 +49,12 @@ const QuestForm = ({ route, navigation }) => {
             validationSchema={questValidationSchema}
             onSubmit={async (values) => {
                 if (type === 'adventure') {
-                    dispatch(addQuest(values))
+                    dispatch(addAdventureQuest(values))
                 }
                 else if (type === 'main') {
-                    await handlePost(values)
+                    handlePost(values)
                 }
+
                 navigation.goBack()
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (

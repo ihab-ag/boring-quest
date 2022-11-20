@@ -16,7 +16,7 @@ export const mapQuestToDays = (quests, quest) => {
     const due_day = due_date[0]
     const due_month = due_date[1]
     const due_year = due_date[2]
-
+    // if start month and due month are not equal we're gonna map the quests to till end of the year
     while (start_year !== due_year) {
         new_quests[start_year] = { ...new_quests[start_year] }
         for (let month = start_month; month <= 12; month++) {
@@ -25,12 +25,14 @@ export const mapQuestToDays = (quests, quest) => {
                 new_quests[start_year][month][day] = { ...new_quests[start_year][month][day] }
                 new_quests[start_year][month][day][quest_id] = { quest }
             }
+            // start of the month
             start_day = 1
         }
+        // start of the year
         start_month = 1
         start_year += 1
     }
-
+    // when we reach the due year we map the quests till the due month and day
     new_quests[start_year] = { ...new_quests[start_year] }
     for (let month = start_month; month <= due_month; month++) {
         new_quests[start_year][month] = { ...new_quests[start_year][month] }
@@ -44,4 +46,14 @@ export const mapQuestToDays = (quests, quest) => {
 
     return new_quests
 
+}
+
+export const mapQuestsToDays = (quests, questsArray) => {
+    let new_quests = { ...quests }
+
+    for (const quest of questsArray) {
+        new_quests = mapQuestToDays(new_quests, quest)
+    }
+
+    return new_quests
 }

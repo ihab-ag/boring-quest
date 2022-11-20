@@ -1,4 +1,4 @@
-const { axiosPostReq } = require("./configs/axios.config");
+import { axiosPostReq } from "./configs/axios.config"
 
 const route = 'auth/login'
 

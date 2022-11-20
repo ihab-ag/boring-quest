@@ -28,6 +28,8 @@ export const convertValueToProgressbarWidth = (value, total) => {
         return exponent_tailwind_width_equivelent[0.6]
     else if (exponent <= 0.75)
         return exponent_tailwind_width_equivelent[0.75]
-    else if (exponent == 1)
+    else if (exponent <= 0.83)
+        return exponent_tailwind_width_equivelent[0.83]
+    else if (exponent <= 1)
         return exponent_tailwind_width_equivelent[1]
 }

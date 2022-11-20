@@ -2,12 +2,12 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect, useCallback } from 'react'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import store from './src/redux/store'
 import MessageFloater from './src/components/MessageFloater'
 import { NavigationContainer } from '@react-navigation/native'
 import StackSwitcher from './src/components/StackSwitcher'
-
+import AppNotifications from './src/components/AppNotifications'
 export default function App() {
 
   // Load fonts
@@ -21,25 +21,26 @@ export default function App() {
 
   useEffect(() => {
     const prepare = async () => {
-      await SplashScreen.preventAutoHideAsync();
+      await SplashScreen.preventAutoHideAsync()
     }
-    prepare();
-  }, []);
+    prepare()
+  }, [])
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded)
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync()
 
-  }, [fontsLoaded]);
+  }, [fontsLoaded])
 
   if (!fontsLoaded)
-    return null;
+    return null
 
   return (
     <Provider store={store}>
       <NavigationContainer>
         <StackSwitcher />
         <MessageFloater />
+        <AppNotifications />
         <View onLayout={onLayoutRootView}>
           <SafeAreaView>
             {/* <StatusBar backgroundColor='#fff' barStyle='dark-content' /> */}

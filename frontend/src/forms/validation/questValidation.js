@@ -9,7 +9,7 @@ const questValidationSchema = yup.object({
     description: yup.string()
         .required()
         .min(3),
-    asignee: yup.string(),
+    assignee_id: yup.string(),
     due: yup.date()
     .min(new Date(currentDay -1 )),
     type: yup.string()

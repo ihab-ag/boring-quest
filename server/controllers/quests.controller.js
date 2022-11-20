@@ -119,7 +119,7 @@ const submitQuest = async (req, res) => {
 
         await quest.save()
 
-        const user = await User.findById(user_id).populate('quests')
+        const user = await User.findById(user_id)
 
         // handle exp and level
         // gain exp based on difficulty
@@ -193,7 +193,7 @@ const submitQuest = async (req, res) => {
             guild.save()
         }
 
-        res.json(quest)
+        res.json({quest,user})
 
         user.save()
 
@@ -242,10 +242,7 @@ const failQuest = async () => {
             await user.save()
 
             await quest.save()
-
-            console.log(quest.id + 'failed')
         }
-
     }
     catch (error) {
         console.log("failQuest error: " + error)

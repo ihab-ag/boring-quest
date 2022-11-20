@@ -5,18 +5,12 @@ import CustomHeader from '../components/CustomHeader'
 import Floater from '../components/Floater'
 import QuestsScreenTopSection from '../components/QuestsScreenTopSection'
 import QuestsSections from '../components/QuestsSections'
-import { mapQuestToDays } from '../helpers/mapQuestToDays'
 
 const QuestsScreen = ({ navigation, route }) => {
 
     const { year, month, day } = useSelector(state => state.date)
     let questsMap = {}
-    const quests = useSelector(state => state.quests)
-    
-        let quests_obj = {}
-        for (const quest of quests.array) {
-            quests_obj = mapQuestToDays(quests_obj, quest)
-        }
+    const quests_obj = useSelector(state => state.quests.map)
 
         const daily_quests = []
         const weekly_quests = []

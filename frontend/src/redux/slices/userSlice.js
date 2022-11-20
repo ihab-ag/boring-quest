@@ -12,7 +12,9 @@ export const userSlice = createSlice({
             state.level= action.payload.level,
             state.exp= action.payload.exp,
             state.deaths= action.payload.deaths,
-            state.health= action.payload.health
+            state.health= action.payload.health,
+            state.companions= action.payload.companions,
+            state.guilds= action.payload.guilds
         }
     }
 })

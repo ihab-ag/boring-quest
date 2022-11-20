@@ -13,19 +13,24 @@ import DifficultyTab from '../components/DifficultyTab'
 import ErrorText from '../components/ErrorText'
 import questValidationSchema from './validation/questValidation'
 import FullWidthButton from '../components/FullWidthButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { postQuest } from '../apis/postQuest.api'
 import { addQuest } from '../redux/slices/questsSlice'
 import { addAdventureQuest } from '../redux/slices/adventureSlice'
+import AssigneeModal from '../modals/AssigneeModal'
 
 const QuestForm = ({ route, navigation }) => {
 
     const [typeModalVisible, setTypeModalVisible] = useState(false)
     const [dateModalVisible, setDateModalVisible] = useState(false)
+    const [assigneeModalVisible, setAssigneeModalVisible] = useState(false)
 
     const type = route.params.type
 
     const dispatch = useDispatch()
+
+    const user = useSelector(state => state.user)
+    console.log(user)
 
     const handlePost = async (values) => {
 
@@ -33,6 +38,7 @@ const QuestForm = ({ route, navigation }) => {
 
         if (res.status === 200) {
             dispatch(addQuest(res.data))
+            navigation.goBack()
         }
     }
 
@@ -41,7 +47,7 @@ const QuestForm = ({ route, navigation }) => {
             initialValues={{
                 name: '',
                 description: '',
-                asignee: '-',
+                assignee_id: '-',
                 due: type === 'main' ? new Date() : '',
                 type: type === 'main' ? 'todo' : 'adventure',
                 difficulty: 'easy',
@@ -50,12 +56,11 @@ const QuestForm = ({ route, navigation }) => {
             onSubmit={async (values) => {
                 if (type === 'adventure') {
                     dispatch(addAdventureQuest(values))
+                    navigation.goBack()
                 }
                 else if (type === 'main') {
                     handlePost(values)
                 }
-
-                navigation.goBack()
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -95,8 +100,13 @@ const QuestForm = ({ route, navigation }) => {
                                             <LabelText title='Quest type' color='text-secondary' />
                                             <DropDown value={values.type} onPress={() => setTypeModalVisible(true)} />
                                         </View>
+                                        {/* Quest Assignee */}
+                                        {user.type === 'guild' && <View className='flex-row justify-between items-center mt-4'>
+                                            <LabelText title='Assignee' color='text-secondary' />
+                                            <DropDown value={user.companions.find(user => user._id === values.assignee_id)?.name || '-'} onPress={() => setAssigneeModalVisible(true)} />
+                                            {errors.assignee_id && <ErrorText text={errors.assignee_id} />}
+                                        </View>}
                                         {/* End Date */}
-
                                         <View className='flex-row justify-between items-center mt-4'>
                                             <LabelText title='End date' color='text-secondary' />
                                             <DropDown value={values.due.toDateString()} onPress={() => setDateModalVisible(true)} />
@@ -133,6 +143,12 @@ const QuestForm = ({ route, navigation }) => {
                             setModalVisible={(value) => setTypeModalVisible(value)}
                             setFieldValue={setFieldValue}
                             values={values}
+                        />
+                        <AssigneeModal modalVisible={assigneeModalVisible}
+                            setModalVisible={(value) => setAssigneeModalVisible(value)}
+                            setFieldValue={setFieldValue}
+                            values={values}
+                            companions={user.companions}
                         />
                         {dateModalVisible && (<DateModal
                             modalVisible={dateModalVisible}

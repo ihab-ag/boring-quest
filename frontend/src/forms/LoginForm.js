@@ -29,7 +29,8 @@ const LoginForm = ({ navigation }) => {
         const res = await loginReq(values)
         
         if (res.status === 200) {
-            await SecureStore.setItemAsync('TOKEN', res.data.authorisation.token);
+            await SecureStore.setItemAsync('TOKEN', res.data.authorisation.token)
+            console.log(res.data.authorisation.token)
 
             const user_data = res.data.user
 
@@ -54,7 +55,7 @@ const LoginForm = ({ navigation }) => {
             }}
             validationSchema={loginValidationSchema}
             onSubmit={values => {
-                console.log(values)
+                
                 handleLogin(values)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

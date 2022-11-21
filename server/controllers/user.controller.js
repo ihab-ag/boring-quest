@@ -27,7 +27,8 @@ const sendOrAcceptInvite = async (req, res) => {
             throw 'user already invited'
         }
         // check if user is a companion or guild member
-        else if (user.companions.includes(invited_id) || (user.type === ADVENTURER && user.guilds.includes(invited_id))) {
+        else if (user.companions.includes(invited_id) || user.guilds.includes(invited_id)) {
+            console.log(user._id)
             throw 'user already a friend'
         }
 
@@ -61,6 +62,8 @@ const sendOrAcceptInvite = async (req, res) => {
 
         invited_user.save()
 
+        await user.populate(['guilds', 'companions', 'invites'])
+        
         res.json(user)
 
     }
@@ -80,7 +83,7 @@ const deleteFriend = async (req, res) => {
             User.findById(user_id).exec(),
             User.findById(deleted_id).exec()
         ])
-
+        
         // remove user from deleted users companions
         if (user.type === ADVENTURER) {
             deleted_user.companions = deleted_user.companions.filter(id => id != user_id)
@@ -105,6 +108,8 @@ const deleteFriend = async (req, res) => {
         user.save()
         deleted_user.save()
 
+        await user.populate(['guilds', 'companions', 'invites'])
+
         res.json(user)
     }
     catch (error) {
@@ -122,8 +127,8 @@ const searchUsers = async (req, res) => {
 
     const query = {
         username: { $regex: username },
-        type: user_type === GUILD ? ADVENTURER :  { $regex: '' },
-        _id: { $ne: user_id}
+        type: user_type === GUILD ? ADVENTURER : { $regex: '' },
+        _id: { $ne: user_id }
     }
     const users = await User.find(query)
 

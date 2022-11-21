@@ -83,9 +83,11 @@ const deleteFriend = async (req, res) => {
             User.findById(user_id).exec(),
             User.findById(deleted_id).exec()
         ])
-        
+        if(user.invites.includes(deleted_id)){
+            user.invites = user.invites.filter(id => id != deleted_id)
+        }
         // remove user from deleted users companions
-        if (user.type === ADVENTURER) {
+        else if (user.type === ADVENTURER) {
             deleted_user.companions = deleted_user.companions.filter(id => id != user_id)
             if (deleted_user.type === ADVENTURER) {
                 // remove deleted user from users companions

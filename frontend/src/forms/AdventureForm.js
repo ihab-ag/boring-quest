@@ -15,7 +15,7 @@ import DateModal from '../modals/DateModal'
 import { emptyQuests, removeQuest } from '../redux/slices/adventureSlice'
 import adventureValidationSchema from './validation/adventureValidation'
 import mapQuests from '../helpers/mapQuests'
-import { postAdventure } from '../apis/postAdventure'
+import { postAdventure } from '../apis/postAdventure.api'
 import { addQuest } from '../redux/slices/questsSlice'
 
 const AdventureForm = ({ navigation }) => {

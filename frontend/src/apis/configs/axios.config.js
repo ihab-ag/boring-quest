@@ -45,3 +45,17 @@ export const axiosDeleteReq = async (route) => {
         return error
     }
 }
+
+export const axiosGetReq = async(route) => {
+    const TOKEN = await SecureStore.getItemAsync('TOKEN') || null
+    
+    try {
+        return await axios.get(BASE_URL + route, {
+            headers: {
+                'Authorization': 'Bearer ' + `${TOKEN}`
+            }
+        });
+    } catch (error) {
+        return error;
+    }
+}

@@ -15,6 +15,7 @@ export const userSlice = createSlice({
             state.health= action.payload.health,
             state.companions= action.payload.companions,
             state.guilds= action.payload.guilds
+            state.invites= action.payload.invites
         }
     }
 })

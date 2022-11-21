@@ -1,16 +1,16 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Avatar from '../components/Avatar'
+import Avatar from './Avatar'
 import ProgressBar from './ProgressBar'
 import TopColoredSection from '../layouts/TopColoredSection'
-import { useSelector } from 'react-redux'
 
-const QuestsScreenTopSection = () => {
-    const user = useSelector(state => state.user)
+const UserProgressCard = ({user}) => {
+    
     const health = user.health
     const level = user.level
     const exp = user.exp
     const total_exp = level * 5
+    
     return (
         <TopColoredSection color='bg-primary' flex='flex-row'>
             <Avatar />
@@ -34,4 +34,4 @@ const QuestsScreenTopSection = () => {
     )
 }
 
-export default QuestsScreenTopSection
+export default UserProgressCard

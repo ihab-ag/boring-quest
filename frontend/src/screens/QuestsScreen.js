@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import CustomHeader from '../components/CustomHeader'
 import Floater from '../components/Floater'
-import QuestsScreenTopSection from '../components/QuestsScreenTopSection'
+import UserProgressCard from '../components/UserProgressCard'
 import QuestsSections from '../components/QuestsSections'
 
 const QuestsScreen = ({ navigation, route }) => {
-
+    const user = useSelector(state => state.user)
     const { year, month, day } = useSelector(state => state.date)
     let questsMap = {}
     const quests_obj = useSelector(state => state.quests.map)
@@ -47,7 +47,7 @@ const QuestsScreen = ({ navigation, route }) => {
     return (
         <>
             <CustomHeader navigation={navigation} route={route} type='drawer' />
-            <QuestsScreenTopSection />
+            <UserProgressCard user={user}/>
             <QuestsSections navigation={navigation} quests={questsMap} />
             <Floater navigation={navigation} />
         </>

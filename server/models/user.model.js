@@ -62,6 +62,9 @@ const userSchema = mongoose.Schema({
     }],
     token: {
         type: String
+    },
+    avatar: {
+        type: String
     }
 })
 

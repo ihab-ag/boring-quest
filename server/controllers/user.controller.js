@@ -1,4 +1,6 @@
 const User = require('../models/user.model')
+const { Expo } = require('expo-server-sdk')
+const sendPushNotification = require('../services/pushNotifications')
 
 const ADVENTURER = 'adventurer'
 const GUILD = 'guild'
@@ -34,6 +36,7 @@ const sendOrAcceptInvite = async (req, res) => {
 
         // check if invited user invited the user
         if (user.invites.includes(invited_id)) {
+   
             // remove invited user from invites
             user.invites = user.invites.filter(id => id != invited_id)
             if (user.type === ADVENTURER) {
@@ -50,7 +53,7 @@ const sendOrAcceptInvite = async (req, res) => {
             }
             else if (user.type === GUILD) {
                 user.companions = [...user.companions, invited_id]
-                invited_user.guilds = [...invited_user.guilds, invited_id]
+                invited_user.guilds = [...invited_user.guilds, user_id]
             }
 
             user.save()
@@ -58,6 +61,7 @@ const sendOrAcceptInvite = async (req, res) => {
         // send invite to invited user
         else {
             invited_user.invites = [...invited_user.invites, user_id]
+           
         }
 
         invited_user.save()
@@ -68,6 +72,7 @@ const sendOrAcceptInvite = async (req, res) => {
 
     }
     catch (error) {
+       
         res.status(400).send(error)
     }
 

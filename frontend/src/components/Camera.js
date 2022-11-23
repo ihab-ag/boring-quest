@@ -23,9 +23,9 @@ const MyCamera = ({ setPhoto, setVisible }) => {
     }, [])
 
     if (hasCameraPermission === undefined) {
-        return <Text>Requesting permissions...</Text>
+        return <></>
     } else if (!hasCameraPermission) {
-        return <Text>Permission for camera not granted. Please change this in settings.</Text>
+        return <></>
     }
 
     const takePic = async () => {
@@ -37,6 +37,7 @@ const MyCamera = ({ setPhoto, setVisible }) => {
         setLoading(true)
 
         const newPhoto = await cameraRef.current.takePictureAsync(options)
+
 
         setPhoto(newPhoto)
 
@@ -50,9 +51,8 @@ const MyCamera = ({ setPhoto, setVisible }) => {
     const toggleCameraType = () => {
         setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
-
     return (
-        <Camera className='absolute h-full w-full' flashMode={flash} ref={cameraRef} type={type}>
+        <Camera className='absolute h-full w-full' flashMode={flash} ref={cameraRef} type={type} >
             <View className='absolute bottom-0 flex-row w-full p-2 justify-between items-center'>
                 <View className='p-4'>
                     <MaterialIcons name="camera-alt" size={32} color="#fff0" /></View>

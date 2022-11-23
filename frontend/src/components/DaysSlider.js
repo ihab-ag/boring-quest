@@ -12,6 +12,7 @@ const DaysSlider = ({dispatch, days, day}) => {
 
         return (
             <DayTab
+            key={item}
                 day={item}
                 onPress={() => {
                     dispatch(item)
@@ -26,6 +27,7 @@ const DaysSlider = ({dispatch, days, day}) => {
             <FlatList
                 data={getMonthDaysArray(days)}
                 renderItem={renderDay}
+                keyExtractor={item => item}
                 horizontal
                 showsHorizontalScrollIndicator={false}
             />

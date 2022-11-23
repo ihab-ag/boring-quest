@@ -10,10 +10,11 @@ const UserProgressCard = ({user}) => {
     const level = user.level
     const exp = user.exp
     const total_exp = level * 5
+    const avatar = user.avatar
     
     return (
         <TopColoredSection color='bg-primary' flex='flex-row'>
-            <Avatar />
+            <Avatar avatar={avatar}/>
             <View className='flex-1 ml-6 justify-around'>
                 <View>
                     <View className='flex-row justify-between items-end'>

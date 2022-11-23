@@ -40,9 +40,12 @@ const LoginForm = ({ navigation }) => {
             // map quests and adventures to day
             let quests_map = mapQuestsToDays({}, user_data.quests)
             quests_map = mapQuestsToDays(quests_map, user_data.adventures)
-
+            // sort quests data
+            const quest_data = getQuestData(user_data.quests)
 
             dispatch(setQuests(quests_map))
+
+            dispatch(setData(quest_data))
 
             dispatch(login())
         }

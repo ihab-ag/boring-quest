@@ -59,7 +59,10 @@ const userSchema = mongoose.Schema({
     invites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+    token: {
+        type: String
+    }
 })
 
 const User = mongoose.model('User', userSchema)

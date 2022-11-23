@@ -41,7 +41,7 @@ const MonthYearPickerModal = ({ modalVisible, setModalVisible }) => {
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                     extraData={month}
-                    initialScrollIndex={month}
+                    initialScrollIndex={month - 1}
                 />
             </View>
         </ModalLayout>

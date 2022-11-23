@@ -1,5 +1,7 @@
 import * as Notifications from 'expo-notifications'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../redux/slices/authSlice'
 
 
 Notifications.setNotificationHandler({
@@ -9,10 +11,10 @@ Notifications.setNotificationHandler({
   })
 
 const AppNotifications = () => {
-
-
+    
+    const dispatch = useDispatch()
     async function registerForPushNotificationsAsync() {
-        let token;
+        let token
 
         const { status: existingStatus } = await Notifications.getPermissionsAsync()
         let finalStatus = existingStatus
@@ -26,8 +28,8 @@ const AppNotifications = () => {
             return
         }
         token = (await Notifications.getExpoPushTokenAsync()).data
-        console.log(token)
-
+        
+        dispatch(setToken(token))
         return token
     }
         useEffect(() => {

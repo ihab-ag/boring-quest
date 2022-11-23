@@ -77,12 +77,13 @@ const AdventureForm = ({ navigation }) => {
                                     {touched.description && errors.description && <ErrorText text={errors.description} />}
                                 </View>
                             </TopColoredSection>
+                            {/* add quets button */}
                             <TouchableOpacity className='flex-row p-2 bg-primary justify-center items-center'
                                 onPress={() =>
                                     navigation.navigate('New Quest', {
                                         type: 'adventure'
                                     })}>
-                                <Text className='text-white font-inter-semibold text-base'>ADD QUEST </Text>
+                                <Text className='text-white font-inter-bold text-base'>ADD QUEST </Text>
                                 <Entypo name="plus" size={24} color='white' />
                             </TouchableOpacity>
                             <DefaultScreen>
@@ -106,7 +107,7 @@ const AdventureForm = ({ navigation }) => {
                             </DefaultScreen>
                         </ScrollView>
                         <FullWidthButton onPress={() => {
-                            setFieldValue('quests', questsArray)
+                            values.quests = [...questsArray]
                             handleSubmit()
                         }} title={'START ADVENTURE'} />
                         {/* modals */}

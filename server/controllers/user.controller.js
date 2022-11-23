@@ -64,7 +64,10 @@ const sendOrAcceptInvite = async (req, res) => {
         // send invite to invited user
         else {
             invited_user.invites = [...invited_user.invites, user_id]
-           
+            // send invite notification
+            if (Expo.isExpoPushToken(user.token)) {
+                await sendPushNotification(user.token, `${user.username} sent you a friend request`)
+              }
         }
 
         invited_user.save()

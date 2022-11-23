@@ -3,7 +3,7 @@ import React from 'react'
 
 const LabelText = ({ title, color }) => {
     return (
-        <Text className={`font-inter-medium ${color} text-lg`}>{title + ':'}</Text>
+        <Text className={`font-inter-medium ${color} text-base`}>{title}</Text>
     )
 }
 

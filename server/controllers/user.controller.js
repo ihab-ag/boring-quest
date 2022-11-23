@@ -36,7 +36,10 @@ const sendOrAcceptInvite = async (req, res) => {
 
         // check if invited user invited the user
         if (user.invites.includes(invited_id)) {
-   
+            // send accepted invite
+            if (Expo.isExpoPushToken(user.token)) {
+                await sendPushNotification(user.token, `${user.username} accepted your a friend request`)
+              }
             // remove invited user from invites
             user.invites = user.invites.filter(id => id != invited_id)
             if (user.type === ADVENTURER) {

@@ -9,35 +9,38 @@ import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
 import { loginReq } from '../apis/login.api'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, setToken } from '../redux/slices/authSlice'
+import { login } from '../redux/slices/authSlice'
 import { setMessage } from '../redux/slices/globalMessageSlice'
 import { setUser } from '../redux/slices/userSlice'
 import { destructureUser } from '../helpers/destructureUser'
-import { setQuests } from '../redux/slices/questsSlice'
+import { setQuests, setData } from '../redux/slices/questsSlice'
 import { mapQuestsToDays } from '../helpers/mapQuestToDays'
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store'
+import { getQuestData } from '../helpers/getQuestData'
 
 const LoginForm = ({ navigation }) => {
-
 
     const [rememberMe, setRememberMe] = useState(false)
 
     const dispatch = useDispatch()
+    // set notification token
+    const token = useSelector(state => state.auth.token)
 
     const handleLogin = async (values) => {
+        // send notification token with login credentials
+        const res = await loginReq({ ...values, push_token: token })
 
-        const res = await loginReq(values)
-        
         if (res.status === 200) {
+            // store jwt 
             await SecureStore.setItemAsync('TOKEN', res.data.authorisation.token)
-            console.log(res.data.authorisation.token)
 
             const user_data = res.data.user
 
             dispatch(setUser(destructureUser(user_data)))
-
+            // map quests and adventures to day
             let quests_map = mapQuestsToDays({}, user_data.quests)
             quests_map = mapQuestsToDays(quests_map, user_data.adventures)
+
 
             dispatch(setQuests(quests_map))
 
@@ -55,7 +58,7 @@ const LoginForm = ({ navigation }) => {
             }}
             validationSchema={loginValidationSchema}
             onSubmit={values => {
-                
+
                 handleLogin(values)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

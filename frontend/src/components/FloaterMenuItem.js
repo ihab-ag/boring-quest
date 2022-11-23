@@ -14,8 +14,10 @@ const FloaterMenuItem = ({ menuItemStyle, children, title, onPress }) => {
                 <View className='-rotate-45'>
                     {children}
                 </View>
-            </Animated.View>
-            <Text className='text-secondary font-inter-medium text-xs'>{title}</Text>
+            </Animated.View >
+            <View className='bg-white'>
+                <Text className='text-secondary font-inter-medium text-xs '>{title}</Text>
+            </View>
         </TouchableOpacity>
     )
 }

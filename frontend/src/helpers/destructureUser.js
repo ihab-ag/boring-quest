@@ -10,6 +10,7 @@ export const destructureUser = (user_data) => {
         health: user_data.health,
         guilds: user_data.guilds,
         companions: user_data.companions,
-        invites: user_data.invites
+        invites: user_data.invites,
+        avatar: user_data.avatar
     }
 }

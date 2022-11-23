@@ -34,7 +34,7 @@ const QuestForm = ({ route, navigation }) => {
     const handlePost = async (values) => {
 
         const res = await postQuest(values)
-
+        
         if (res.status === 200) {
             dispatch(addQuest(res.data))
             navigation.goBack()
@@ -106,10 +106,10 @@ const QuestForm = ({ route, navigation }) => {
                                             {errors.assignee_id && <ErrorText text={errors.assignee_id} />}
                                         </View>}
                                         {/* End Date */}
-                                        <View className='flex-row justify-between items-center mt-4'>
+                                        {values.type === 'todo' && <View className='flex-row justify-between items-center mt-4'>
                                             <LabelText title='End date' color='text-secondary' />
                                             <DropDown value={values.due.toDateString()} onPress={() => setDateModalVisible(true)} />
-                                        </View>
+                                        </View>}
                                     </>)}
                                 {/* Difficulties */}
                                 <View className='mt-4' >
@@ -118,7 +118,7 @@ const QuestForm = ({ route, navigation }) => {
                                         {
                                             DIFFICULTIES.map((item) => {
                                                 const color = item.value === values.difficulty ? item.bg_selected_color : item.bg_color
-                                                const text_color = item.value === values.difficulty ? 'text-secondary/70' : 'text-secondary/50'
+                                                const text_color = item.value === values.difficulty ? 'text-secondary/60' : 'text-secondary/30'
                                                 return (
                                                     <DifficultyTab
                                                         key={item.value}

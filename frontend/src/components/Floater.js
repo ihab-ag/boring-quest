@@ -35,7 +35,6 @@ const Floater = ({navigation}) => {
     })
     const menuStyle = useAnimatedStyle(() => {
         return {
-            backgroundColor: '#fff4',
             height: withTiming(height.value, config),
             bottom: withTiming(bottom.value, config),
             opacity: withTiming(opacity.value, { duration: 700 })

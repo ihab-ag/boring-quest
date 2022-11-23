@@ -16,6 +16,7 @@ export const userSlice = createSlice({
             state.companions= action.payload.companions,
             state.guilds= action.payload.guilds
             state.invites= action.payload.invites
+            state.avatar= action.payload.avatar
         }
     }
 })

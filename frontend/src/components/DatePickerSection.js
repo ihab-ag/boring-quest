@@ -18,7 +18,7 @@ const DatePickerSection = () => {
     return (
         <View className='mt-4' >
             <View className='flex-row justify-between items-center'>
-                <SectionTitleText>Your <Text className='font-inter'>Calender</Text></SectionTitleText>
+                <SectionTitleText>Your <Text className='font-inter'>Calendar</Text></SectionTitleText>
                 <DropDown onPress={() => setModalVisible(true)} value={MONTHS[month - 1].name} />
             </View>
             <DaysSlider dispatch={(item) => dispatch(setDay(item))} day={day} days={days} />

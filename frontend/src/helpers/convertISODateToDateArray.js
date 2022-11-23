@@ -9,7 +9,9 @@ export const convertISODateToDateArray = (iso_date) => {
 
     const year = date.getFullYear()
 
-    const date_array = [day, month, year]
+    const hour = date.getHours()
+
+    const date_array = [day, month, year, hour]
 
     return date_array
 }

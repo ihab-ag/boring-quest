@@ -6,7 +6,8 @@ import Button from '../components/Button'
 import { Formik } from 'formik'
 import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
-import Tab from './Tab'
+import Tab from '../components/Tab'
+import { signupReq } from '../apis/signup.api'
 
 const SignUpForm = ({ navigation }) => {
     return (
@@ -17,9 +18,10 @@ const SignUpForm = ({ navigation }) => {
                 name: '',
                 type: 'adventurer'
             }}
-            validationSchema={loginValidationSchema}
-            onSubmit={values => {
-                console.log(values)
+            // validationSchema={loginValidationSchema}
+            onSubmit={ async values => {
+                const req = await signupReq(values)
+                console.log(req)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -63,7 +65,7 @@ const SignUpForm = ({ navigation }) => {
                                 <Tab title='Guild' onPress={() => setFieldValue('type', 'guild')} selected={values.type === 'guild'} />
                             </View>
                         </View>
-                        <View className='flex-1 justify-between mt-2'>
+                        <View className='flex-1 justify-between mt-4'>
                             <Button color='bg-primary' title='SIGNUP' onPress={handleSubmit} />
                             <View className='h-2' />
                             <Button color='bg-secondary' title='RUN AWAY' onPress={() => navigation.goBack()} />

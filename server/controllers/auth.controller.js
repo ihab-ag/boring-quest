@@ -36,7 +36,7 @@ const signUp = async (req, res) => {
 // login method
 const login = async (req, res) => {
 
-    const { username, password } = req.body
+    const { username, password, push_token } = req.body
 
     try {
 
@@ -59,6 +59,7 @@ const login = async (req, res) => {
         });
 
         
+        user.token = push_token
 
         user.save()
        

@@ -7,7 +7,7 @@ import { Item } from '../components/ListPickerItem'
 const AssigneeModal = ({ modalVisible, setModalVisible, setFieldValue, companions, values }) => {
     return (
         <ModalLayout modalVisible={modalVisible} >
-            <ModalHeader title='Set Type' onPress={() => setModalVisible(false)} />
+            <ModalHeader title='Assign User' onPress={() => setModalVisible(false)} />
             <View className='bg-white'>
                 {
                     companions.map((user) => {

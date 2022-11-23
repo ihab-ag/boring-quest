@@ -10,6 +10,8 @@ const signUp = async (req, res) => {
     try {
         const user = new User()
 
+        const rand = Math.floor(Math.random() * 9)
+
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/mg
 
         if (!passwordRegex.test(password))
@@ -19,12 +21,14 @@ const signUp = async (req, res) => {
         user.username = username
         user.password = await bcrypt.hash(password, 10)
         user.type = type
+        user.avatar = `avatars/${rand}.png`
 
         await user.save()
 
         res.json(user)
     }
     catch (error) {
+        
         res.status(400).send(error)
     }
 }
@@ -36,7 +40,7 @@ const login = async (req, res) => {
 
     try {
 
-        const user = await User.findOne({ username }).select("+password").populate(['guilds', 'quests', 'companions', {path:'adventures', populate: 'quests'}, 'invites'])
+        const user = await User.findOne({ username }).select("+password").populate(['guilds', 'quests', 'companions', { path: 'adventures', populate: 'quests' }, 'invites'])
 
         if (!user)
             throw "Invalid Credentials";
@@ -54,9 +58,10 @@ const login = async (req, res) => {
             expiresIn: '12h'
         });
 
-        // hide password
-        user.password = ""
+        
 
+        user.save()
+       
         return res.json({
             authorisation: {
                 token: token,

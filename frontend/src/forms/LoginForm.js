@@ -20,8 +20,6 @@ import { getQuestData } from '../helpers/getQuestData'
 
 const LoginForm = ({ navigation }) => {
 
-    const [rememberMe, setRememberMe] = useState(false)
-
     const dispatch = useDispatch()
     // set notification token
     const token = useSelector(state => state.auth.token)
@@ -88,7 +86,6 @@ const LoginForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
-                        <CheckBox value={rememberMe} setValue={setRememberMe} />
                         <View className='flex-row flex-1 justify-between py-2 mt-2'>
                             <Button color='bg-secondary' title='SIGNUP' onPress={() => navigation.navigate('Sign Up')} />
                             <View className='w-2' />

@@ -1,10 +1,12 @@
 const Quest = require('../models/quest.model')
 const User = require('../models/user.model')
+const sendPushNotification = require('../services/pushNotifications')
 const base64toImage = require('../utils/base64toImage')
 const { incrementDay, incrementWeek, incrementMonth } = require('../utils/dateFunctions')
+const { Expo } = require('expo-server-sdk')
 
 
-const current_date = new Date()
+const current_date = new Date().setHours(0, 0, 0)
 const REOCCURING_TYPES = ['daily', 'weekly', 'monthly']
 
 // create quest
@@ -17,8 +19,10 @@ const createQuest = async (req, res) => {
 
     try {
 
-        const due_date = new Date(due)
-        
+        const user = await User.findById(user_id).populate('quests')
+
+        const due_date = new Date(due).getTime()
+
         if (due_date < current_date)
             throw 'due date cannot be less than today'
 
@@ -27,11 +31,11 @@ const createQuest = async (req, res) => {
         quest.name = name
         quest.description = description
         quest.type = type
-        quest.due = due
         quest.difficulty = difficulty
         quest.status = 'in progress'
         quest.creator = user_id
 
+       
         // if user type guild add assignee to quest and quest to assignee
 
         if (user_type === 'guild') {
@@ -48,23 +52,21 @@ const createQuest = async (req, res) => {
             assignee.quests = [...assignee.quests, quest.id]
 
             assignee.save()
+
+           
+
         }
         else
             await quest.save()
 
-        const user = await User.findByIdAndUpdate(user_id, {
-            $push: {
-                quests: quest.id
-            }
-        }, {
-            new: true
-        }).populate('quests')
+       
 
         user.save()
 
         res.json(quest)
     }
     catch (error) {
+        
         res.status(400).send(error)
     }
 }
@@ -93,8 +95,10 @@ const submitQuest = async (req, res) => {
 
         const due = new Date(quest.due)
 
+        const quests = []
+
         // check due time
-        if (due.getTime() < current_date.getTime())
+        if (due.getTime() < current_date)
             throw 'cannot submit after due date'
 
         // check if quest is already submitted
@@ -149,6 +153,8 @@ const submitQuest = async (req, res) => {
             guild.level = stats_data.level
 
             guild.exp = stats_data.exp
+
+           
         }
 
         // recreate quest if its reoccuring (daily, weekly, monthly)
@@ -167,20 +173,23 @@ const submitQuest = async (req, res) => {
             new_quest.difficulty = difficulty
             new_quest.status = 'in progress'
             new_quest.creator = quest.creator
+            
             if (guild)
                 new_quest.assignee = quest.assignee
 
-            if (type === 'daily') {
+            if (type === 'daily')
                 new_quest.due = incrementDay(iso_date)
-            }
-            else if (type === 'weekly') {
+
+            else if (type === 'weekly')
                 new_quest.due = incrementWeek(iso_date)
-            }
-            else if (type === 'monthly') {
+
+            else if (type === 'monthly')
                 new_quest.due = incrementMonth(iso_date)
-            }
+
 
             await new_quest.save()
+
+           
 
             if (guild) {
                 guild.quests = [...guild.quests, new_quest]
@@ -193,13 +202,15 @@ const submitQuest = async (req, res) => {
             guild.save()
         }
 
-        res.json({quest,user})
+        
+
+        res.json({ quests, user })
 
         user.save()
 
     }
     catch (error) {
-
+       
         res.status(400).send(error)
     }
 }

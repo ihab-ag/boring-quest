@@ -8,7 +8,8 @@ const initialState = {
     afternoon: afternoon,
     night: night,
     total_quests: 0,
-    total_submitted: 0
+    total_submitted: 0,
+    bar_data: []
 }
 export const questsSlice = createSlice({
     name: 'quests',
@@ -27,6 +28,7 @@ export const questsSlice = createSlice({
             state.night = action.payload[3]
             state.total_quests = action.payload[4]
             state.total_submitted = action.payload[5]
+            state.bar_data = action.payload[6]
         }
     }
 })

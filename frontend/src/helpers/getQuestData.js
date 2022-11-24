@@ -44,7 +44,7 @@ export const getQuestData = (quests) => {
                 else
                     night_array[hour - 18] = { ...night_array[hour - 18], value: night_array[hour - 18].value + 1 }
 
-                bar_data[month] = { ...bar_data[month], value: bar_data[month].value + 1 }
+                bar_data[month - 1] = { ...bar_data[month - 1], value: bar_data[month - 1].value + 1 }
             }
         }
         catch (error) {

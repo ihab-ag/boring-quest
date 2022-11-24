@@ -69,7 +69,10 @@ const createQuest = async (req, res) => {
 
             assignee.save()
 
-          
+            // send assigned notification
+            if (Expo.isExpoPushToken(assignee.token)) {
+                await sendPushNotification(assignee.token, `${user.username} assigned you a quest`)
+            }
 
         }
         else

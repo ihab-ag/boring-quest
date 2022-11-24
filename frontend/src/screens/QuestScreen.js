@@ -13,6 +13,7 @@ import { addQuest } from '../redux/slices/questsSlice'
 import mapQuests from '../helpers/mapQuests'
 import { setUser } from '../redux/slices/userSlice'
 import { destructureUser } from '../helpers/destructureUser'
+import { BASE_URL } from '../apis/configs/axios.config'
 
 const QuestScreen = ({ navigation, route }) => {
 
@@ -33,11 +34,11 @@ const QuestScreen = ({ navigation, route }) => {
             "picture_submitted": true,
             "base64Image": photo.base64
         })
-        console.log(res)
+
         if (res.status === 200) {
-            dispatch(addQuest(res.data.quest))
+            for (const quest of res.data.quests)
+                dispatch(addQuest(quest))
             dispatch(setUser(destructureUser(res.data.user)))
-            console.log(res.data)
             navigation.goBack()
         }
     }
@@ -51,11 +52,11 @@ const QuestScreen = ({ navigation, route }) => {
             </TopColoredSection>
             <DefaultScreen>
                 <View className='mt-4 flex-row justify-between items-center'>
-                    <Text className='font-inter-semibold text-secondary text-xl'>Due:</Text>
+                    <Text className='font-inter-semibold text-secondary text-xl'>Due</Text>
                     <Text className='font-inter-medium text-secondary text-base'>{due_date}</Text>
                 </View>
                 {user.type !== 'guild' && quest.status === 'in progress' && <View className='mt-4 flex-row justify-between items-start'>
-                    <Text className='font-inter-semibold text-secondary text-xl'>Submission:</Text>
+                    <Text className='font-inter-semibold text-secondary text-xl'>Submission</Text>
                     <View className='gap-y-4'>
                         <TouchableOpacity onPress={() => setCameraVisible(true)}>
                             <Feather name="camera" size={24} color="#073B4C" />
@@ -71,7 +72,7 @@ const QuestScreen = ({ navigation, route }) => {
                 {
                     quest.picture_url && (
                         <View className='border-2 border-primary mt-4'>
-                            <Image className='align-super h-96' source={{ uri: 'http://192.168.1.101:8000/' + quest._id + '.jpg' }
+                            <Image className='align-super h-96' source={{ uri: BASE_URL + quest._id + '.jpg' }
                             } />
                         </View>
                     )}

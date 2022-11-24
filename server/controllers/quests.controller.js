@@ -85,7 +85,7 @@ const createQuest = async (req, res) => {
         res.json(quest)
     }
     catch (error) {
-        
+        console.log(error)
         res.status(400).send(error)
     }
 }
@@ -142,7 +142,7 @@ const submitQuest = async (req, res) => {
 
         await quest.save()
 
-        const user = await User.findById(user_id)
+        const user = await User.findById(user_id).populate(['companions','guilds','invites'])
 
         // handle exp and level
         // gain exp based on difficulty

@@ -43,7 +43,6 @@ export default function App() {
         <AppNotifications />
         <View onLayout={onLayoutRootView}>
           <SafeAreaView>
-            {/* <StatusBar backgroundColor='#fff' barStyle='dark-content' /> */}
           </SafeAreaView>
         </View>
       </NavigationContainer>

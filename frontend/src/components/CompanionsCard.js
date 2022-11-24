@@ -10,9 +10,10 @@ const CompanionsCard = ({user}) => {
     const exp = user.exp
     const total_exp = level * 5
     const username = user.username
+    const avatar = user.avatar
   return (
     <View className={`bg-primary w-full px-6 py-3 flex-row`}>
-                <Avatar />
+                <Avatar avatar={avatar} />
                 <View className='flex-1 ml-6 justify-around'>
                     <View className='flex-row justify-between items-end'>
                         <Text className='font-inter-medium text-white text-lg capitalize'>{username}</Text>

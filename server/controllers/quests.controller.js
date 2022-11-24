@@ -35,7 +35,23 @@ const createQuest = async (req, res) => {
         quest.status = 'in progress'
         quest.creator = user_id
 
-       
+        if (REOCCURING_TYPES.includes(quest.type)) {
+
+            const iso_date = new Date(current_date).toISOString()
+
+            if (type === 'daily')
+                quest.due = incrementDay(iso_date)
+
+            else if (type === 'weekly')
+                quest.due = incrementWeek(iso_date)
+
+            else if (type === 'monthly')
+                quest.due = incrementMonth(iso_date)
+
+        }
+        else
+            quest.due = due
+
         // if user type guild add assignee to quest and quest to assignee
 
         if (user_type === 'guild') {
@@ -53,13 +69,13 @@ const createQuest = async (req, res) => {
 
             assignee.save()
 
-           
+          
 
         }
         else
             await quest.save()
 
-       
+        user.quests = [...user.quests, quest]
 
         user.save()
 
@@ -154,8 +170,7 @@ const submitQuest = async (req, res) => {
 
             guild.exp = stats_data.exp
 
-           
-        }
+        
 
         // recreate quest if its reoccuring (daily, weekly, monthly)
         if (REOCCURING_TYPES.includes(quest.type)) {
@@ -189,7 +204,7 @@ const submitQuest = async (req, res) => {
 
             await new_quest.save()
 
-           
+            
 
             if (guild) {
                 guild.quests = [...guild.quests, new_quest]
@@ -210,7 +225,7 @@ const submitQuest = async (req, res) => {
 
     }
     catch (error) {
-       
+        
         res.status(400).send(error)
     }
 }

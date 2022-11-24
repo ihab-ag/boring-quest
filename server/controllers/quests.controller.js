@@ -173,7 +173,11 @@ const submitQuest = async (req, res) => {
 
             guild.exp = stats_data.exp
 
-        
+            // send assigned notification
+            if (Expo.isExpoPushToken(guild.token)) {
+                await sendPushNotification(guild.token, `${user.username} submitted a quest`)
+            }
+        }
 
         // recreate quest if its reoccuring (daily, weekly, monthly)
         if (REOCCURING_TYPES.includes(quest.type)) {

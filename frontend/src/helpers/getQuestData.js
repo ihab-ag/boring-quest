@@ -7,6 +7,20 @@ export const getQuestData = (quests) => {
     const morning_array = [...morning]
     const afternoon_array = [...afternoon]
     const night_array = [...night]
+    const bar_data = [
+        { label: 'Jan', value: 0 },
+        { label: 'Feb', value: 0 },
+        { label: 'Mar', value: 0 },
+        { label: 'Apr', value: 0 },
+        { label: 'May', value: 0 },
+        { label: 'Jun', value: 0 },
+        { label: 'Jul', value: 0 },
+        { label: 'Aug', value: 0 },
+        { label: 'Sep', value: 0 },
+        { label: 'Oct', value: 0 },
+        { label: 'Nov', value: 0 },
+        { label: 'Dec', value: 0 },
+    ]
     const total_quests = quests.length
     let total_submitted = 0
 
@@ -29,11 +43,13 @@ export const getQuestData = (quests) => {
 
                 else
                     night_array[hour - 18] = { ...night_array[hour - 18], value: night_array[hour - 18].value + 1 }
+
+                bar_data[month] = { ...bar_data[month], value: bar_data[month].value + 1 }
             }
         }
         catch (error) {
             console.log(error)
         }
     }
-    return [midnight_array, morning_array, afternoon_array, night_array, total_quests, total_submitted]
+    return [midnight_array, morning_array, afternoon_array, night_array, total_quests, total_submitted, bar_data]
 }

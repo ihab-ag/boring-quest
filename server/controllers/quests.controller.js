@@ -211,7 +211,7 @@ const submitQuest = async (req, res) => {
 
             await new_quest.save()
 
-            
+            quests.push(new_quest)
 
             if (guild) {
                 guild.quests = [...guild.quests, new_quest]
@@ -224,7 +224,9 @@ const submitQuest = async (req, res) => {
             guild.save()
         }
 
-        
+        quests.push(quest)
+
+        await user.populate
 
         res.json({ quests, user })
 

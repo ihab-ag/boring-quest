@@ -38,9 +38,9 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 | -----------------| ----- | -----|
 | <img src='./readme/quests.png'/> | <img src='./readme/quest.png'> | <img src='./readme/adventure.png'> |
 
-| Artists results  | Artist's Albums  |
+| Statistics  | Companions  |
 | -----------------| -----|
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| <img src='./readme/stats.png'/> | <img src='./readme/companions.png'/> |
 
 
 <br><br>

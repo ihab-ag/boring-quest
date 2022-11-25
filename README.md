@@ -63,7 +63,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Main  | Add Quest | Add Adventure  |
 | -----------------| ----- | ----- |
-| <img src='./readme/quests_imp.gif'/> | <img src='./readme/quest_implementation.jpg'> | <img src='./readme/adventure_implementation.jpg'> |
+| <img src='./readme/quests_imp.gif'/> | <img src='./readme/quest_imp.jpg'> | <img src='./readme/adventure_imp.jpg'> |
 
 <br><br>
 <img src="./readme/title6.svg"/>

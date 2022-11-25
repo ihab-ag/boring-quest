@@ -1,10 +1,11 @@
 import { Image } from 'react-native'
 import React from 'react'
+import { BASE_URL } from '../apis/configs/axios.config'
 
 const Avatar = ({avatar}) => {
 
   return (
-    <Image className='h-20 w-20'  source={{ uri: 'http://192.168.1.102:8000/' + avatar }} />
+    <Image className='h-20 w-20'  source={{ uri: BASE_URL + avatar }} />
   )
 }
 export default Avatar

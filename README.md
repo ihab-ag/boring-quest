@@ -49,11 +49,10 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 
 Here's a brief high-level overview of the tech stack the Well app uses:
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+- This project uses the [React Native app development framework](https://reactnative.dev/). React native is used for building native apps using React. It can be used to develop applications that target anything from Android, iOS devices to Windows systems.
+- For storage (database), the app uses the Mongodb(https://www.mongodb.com/) package which allows for fast and easy access to data.
+- To send local push notifications, the app uses [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications) package which supports Android, iOS.
+- The app uses a simple and fun design aimed to give the user an easy to use app while maintaing a game theme.
 
 
 
@@ -82,20 +81,39 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
-### Installation
+* expo cli
+  ```sh
+  npm install -g expo-cli
+  ```
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+### Installation & Setup
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/ihab-ag/boring-quest.git
    ```
-3. Install NPM packages
+2. Install NPM packages for server
    ```sh
+   cd server
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Create and setup '.env' file
+   ```sh
+   PORT = '[Your port]'
+
+   DB_URL= '[Your mongodb url]'
+
+   JWT_SECRET_KEY= '[Your jwt secret key]'
    ```
+4. Install NPM packages for frontend
+   ```sh
+   cd frontend
+   npm install
+   ```
+5. Connect app to server
+   ```js
+   cd frontend/src/apis/configs/axios.config.js
+   change the 'BASE_URL' to your server IPv4 with the port
+   (Be sure to be connected to the same network) 
+   ```
+- 🚨 Due to circumstances this app has only been tested on android, so for the best expirenece it is the recomended OS

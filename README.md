@@ -38,9 +38,9 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 | -----------------| ----- | ----- |
 | <img src='./readme/quests.png'/> | <img src='./readme/quest.png'> | <img src='./readme/adventure.png'> |
 
-| Statistics  | Companions  |
+<!-- | Statistics  | Companions  |
 | ----------------- | ----- |
-| <img src='./readme/stats.png'/> | <img src='./readme/companions.png'/> |
+| <img src='./readme/stats.png'/> | <img src='./readme/companions.png'/> | -->
 
 
 <br><br>

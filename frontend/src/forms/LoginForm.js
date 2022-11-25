@@ -27,7 +27,7 @@ const LoginForm = ({ navigation }) => {
     const handleLogin = async (values) => {
         // send notification token with login credentials
         const res = await loginReq({ ...values, push_token: token })
-
+        
         if (res.status === 200) {
             // store jwt 
             await SecureStore.setItemAsync('TOKEN', res.data.authorisation.token)
@@ -48,18 +48,19 @@ const LoginForm = ({ navigation }) => {
             dispatch(login())
         }
         else {
-            dispatch(setMessage('login error'))
+            dispatch(setMessage(true))
+            setTimeout(()=>dispatch(setMessage(false)), 2000) 
         }
     }
     return (
         <Formik
             initialValues={{
+                name: '-',
                 username: '',
                 password: ''
             }}
             validationSchema={loginValidationSchema}
             onSubmit={values => {
-
                 handleLogin(values)
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

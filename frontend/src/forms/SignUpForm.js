@@ -8,8 +8,12 @@ import loginValidationSchema from './validation/loginValidation'
 import ErrorText from '../components/ErrorText'
 import Tab from '../components/Tab'
 import { signupReq } from '../apis/signup.api'
+import { useDispatch } from 'react-redux'
+import { setMessage } from '../redux/slices/globalMessageSlice'
 
 const SignUpForm = ({ navigation }) => {
+    const dispatch = useDispatch()
+
     return (
         <Formik
             initialValues={{
@@ -18,13 +22,20 @@ const SignUpForm = ({ navigation }) => {
                 name: '',
                 type: 'adventurer'
             }}
-            // validationSchema={loginValidationSchema}
+            validationSchema={loginValidationSchema}
             onSubmit={ async values => {
-                const req = await signupReq(values)
-                console.log(req)
+                const res = await signupReq(values)
+                console.log(res)
+                if(res.status === 200){
+                    navigation.goBack()
+                }
+                else {
+                    dispatch(setMessage(true))
+                    setTimeout(()=>dispatch(setMessage(false)), 2000) 
+                }
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
                     <View className='p-2'>
                         <View className='py-2 mt-2'>
                             <LabelText title='Name' color='text-primary' />
@@ -57,7 +68,7 @@ const SignUpForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
-                        <View className='mt-2' >
+                        <View className='mt-2 flex-1' >
                             <LabelText title='Type' color='text-primary' />
                             <View className='flex-row mt-2 flex-1'>
                                 <Tab title='Adventurer' onPress={() => setFieldValue('type', 'adventurer')} selected={values.type === 'adventurer'} />

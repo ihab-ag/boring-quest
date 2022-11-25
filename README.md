@@ -22,9 +22,10 @@
    - Being able to create guilds and assign tasks to other users
    
 ### User Stories
-- As a user, I want to browsse ablums, so that I can find quick links
-- As a user, I want to browsse ablums, so that I can find quick links
-- As a user, I want to browsse ablums, so that I can find quick links
+- As a user, I want to make tasks more fun, so that I can be more motivated to finish them
+- As a user, I want to automate reoccuring tasks, so that I can save time
+- As a user, I want to visualize my productivity times, so that I can find the best time to start a task
+- As a user, I want to be able to add friends, so that I can assign them tasks
 
 <br><br>
 

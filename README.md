@@ -116,4 +116,4 @@ This is an example of how to list things you need to use the software and how to
    change the 'BASE_URL' to your server IPv4 with the port
    (Be sure to be connected to the same network) 
    ```
-- 🚨 Due to circumstances this app has only been tested on android, so for the best expirenece it is the recomended OS
+- 🚨 Due to circumstances this app has only been tested on android, so for the best experience it is the recomended OS

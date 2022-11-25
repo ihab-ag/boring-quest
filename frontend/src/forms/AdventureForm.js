@@ -17,6 +17,7 @@ import adventureValidationSchema from './validation/adventureValidation'
 import mapQuests from '../helpers/mapQuests'
 import { postAdventure } from '../apis/postAdventure.api'
 import { addQuest } from '../redux/slices/questsSlice'
+import { setMessage } from '../redux/slices/globalMessageSlice'
 
 const AdventureForm = ({ navigation }) => {
 
@@ -34,6 +35,10 @@ const AdventureForm = ({ navigation }) => {
         if(res.status === 200){
             dispatch(addQuest(res.data))
             navigation.goBack()
+        }
+        else {
+            dispatch(setMessage(true))
+            setTimeout(()=>dispatch(setMessage(false)), 2000) 
         }
     }
     return (

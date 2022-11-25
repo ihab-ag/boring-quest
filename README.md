@@ -67,7 +67,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Statistics  | Companions |
 | -----------------| ----- |
-| <img src='./readme/stats_imp.gif'/> | <img src='./readme/companions_imp.jpg'> |
+| <img src='./readme/stats_imp.gif'/> | <img src='./readme/companions_imp.gif'> |
 
 <br><br>
 <img src="./readme/title6.svg"/>

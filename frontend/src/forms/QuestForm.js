@@ -18,6 +18,7 @@ import { postQuest } from '../apis/postQuest.api'
 import { addQuest } from '../redux/slices/questsSlice'
 import { addAdventureQuest } from '../redux/slices/adventureSlice'
 import AssigneeModal from '../modals/AssigneeModal'
+import { setMessage } from '../redux/slices/globalMessageSlice'
 
 const QuestForm = ({ route, navigation }) => {
 
@@ -38,6 +39,10 @@ const QuestForm = ({ route, navigation }) => {
         if (res.status === 200) {
             dispatch(addQuest(res.data))
             navigation.goBack()
+        }
+        else {
+            dispatch(setMessage(true))
+            setTimeout(()=>dispatch(setMessage(false)), 2000) 
         }
     }
 

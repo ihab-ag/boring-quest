@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    status: 'welcome'
+    status: false
 }
 
 export const globalMessageSlice = createSlice({

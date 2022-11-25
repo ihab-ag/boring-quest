@@ -36,7 +36,7 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 
 | Landing  | Home/Search  |
 | -----------------| -----|
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| <img src="./readme/quests.svg"/> | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
 
 | Artists results  | Artist's Albums  |
 | -----------------| -----|

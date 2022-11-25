@@ -61,10 +61,9 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Uing the above mentioned tech stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Main  | Home/Search  |
-| -----------------| -----|
-| <img src='./readme/quests_imp.gif'/> | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
-
+| Main  | Add Quest | Add Adventure  |
+| -----------------| ----- | ----- |
+| <img src='./readme/quests_imp.gif'/> | <img src='./readme/quest_implementation.jpg'> | <img src='./readme/adventure_implementation.jpg'> |
 
 <br><br>
 <img src="./readme/title6.svg"/>

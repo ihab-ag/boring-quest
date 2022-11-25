@@ -1,19 +1,23 @@
-* { 
-	box-sizing: border-box;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 /* utils */
 
-body{
+body {
     background-color: #ebebeb;
 }
 
-img{
+img {
     width: 100%;
 }
 
-.logo-div{
+.logo-div {
     width: 50%;
+}
+
+.container {
+    padding-inline: 128px;
 }

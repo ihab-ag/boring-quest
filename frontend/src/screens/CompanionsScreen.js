@@ -48,7 +48,7 @@ const CompanionsScreen = ({ navigation, route }) => {
                 }}
             >
                 <View className='h-full bg-white'>
-                <CompanionsSection companions={companions} guilds={guilds} />
+                <CompanionsSection companions={companions} guilds={guilds} deleteReq={deleteReq} />
                 <InvitesSection invites={invites} inviteReq={inviteReq} deleteReq={deleteReq} />
                 </View>
             </Swipeable>

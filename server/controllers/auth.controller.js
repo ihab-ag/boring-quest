@@ -62,8 +62,6 @@ const login = async (req, res) => {
         user.token = push_token
 
         user.save()
-        // hide password
-        user.password = ""
         
         return res.json({
             authorisation: {

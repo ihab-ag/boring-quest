@@ -4,7 +4,6 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useEffect, useCallback } from 'react'
 import { Provider, useSelector } from 'react-redux'
 import store from './src/redux/store'
-import MessageFloater from './src/components/MessageFloater'
 import { NavigationContainer } from '@react-navigation/native'
 import StackSwitcher from './src/components/StackSwitcher'
 import AppNotifications from './src/components/AppNotifications'
@@ -39,7 +38,6 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <StackSwitcher />
-        <MessageFloater />
         <AppNotifications />
         <View onLayout={onLayoutRootView}>
           <SafeAreaView>

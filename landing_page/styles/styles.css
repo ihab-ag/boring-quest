@@ -108,3 +108,11 @@ section {
     height: 5vw;
     border-radius: 5px;
 }
+
+.squares-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 120vh;
+    width: 75vw;
+}

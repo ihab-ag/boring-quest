@@ -105,6 +105,7 @@ section {
 .info-container {
     display: flex;
     justify-content: space-around;
+    width: 60vw
 }
 
 .logo {

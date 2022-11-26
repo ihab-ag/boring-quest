@@ -102,3 +102,9 @@ section {
     position: absolute;
     right: 0px;
 }
+
+.square {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 5px;
+}

@@ -35,7 +35,7 @@ ul {
     list-style: none;
 }
 
-ul :nth-child(2){
+ul :nth-child(2) {
     transform: translateX(25vw);
 }
 
@@ -52,4 +52,8 @@ section {
     width: 100vw;
     height: 100vh;
     position: absolute;
+}
+
+.text-white {
+    color: white
 }

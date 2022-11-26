@@ -105,19 +105,15 @@ section {
 .info-container {
     display: flex;
     justify-content: space-around;
-    width: 60vw
 }
 
 .logo {
-    width: 25vw;
     position: absolute;
     right: 0px;
 }
 
 /* info section */
 .square {
-    width: 4vw;
-    height: 4vw;
     border-radius: 5px;
 }
 
@@ -125,6 +121,4 @@ section {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 100vh;
-    width: 80vw;
 }

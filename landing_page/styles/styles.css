@@ -69,3 +69,8 @@ section {
 .text-grey {
     color: #a5a5a5;
 }
+
+.info-container{
+    display: flex;
+    justify-content: space-around;
+}

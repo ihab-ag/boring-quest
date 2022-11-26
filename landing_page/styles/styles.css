@@ -98,10 +98,9 @@ section {
 }
 
 /* hero section */
-.hero-section {
+.hero-section{
     background: #118AB2;
 }
-
 .info-container {
     display: flex;
     justify-content: space-around;
@@ -126,4 +125,5 @@ section {
     justify-content: space-between;
     position: absolute;
     top: 100vh;
+    width: 80vw;
 }

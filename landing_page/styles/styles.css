@@ -96,3 +96,10 @@ section {
     display: flex;
     justify-content: space-around;
 }
+
+.logo{
+    width: 30vw;
+    position: absolute;
+    z-index: 5;
+    right: 0px;
+}

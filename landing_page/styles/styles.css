@@ -109,6 +109,7 @@ section {
 }
 
 .logo {
+    width: 25vw;
     position: absolute;
     right: 0px;
 }

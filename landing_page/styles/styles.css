@@ -6,6 +6,11 @@
 
 /* fonts */
 @font-face {
+    font-family: source-sans;
+    src: url(./assets/fonts/SourceSansPro-Regular.ttf);
+}
+
+@font-face {
     font-family: source-sans-bold;
     src: url(./assets/fonts/SourceSansPro-Bold.ttf);
 }

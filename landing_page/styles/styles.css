@@ -84,6 +84,10 @@ section {
     color: #06D6A0;
 }
 
+.text-red {
+    color: #EF476F;
+}
+
 .info-container{
     display: flex;
     justify-content: space-around;

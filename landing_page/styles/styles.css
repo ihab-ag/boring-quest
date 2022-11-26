@@ -80,6 +80,10 @@ section {
     color: #a5a5a5;
 }
 
+.text-green {
+    color: #06D6A0;
+}
+
 .info-container{
     display: flex;
     justify-content: space-around;

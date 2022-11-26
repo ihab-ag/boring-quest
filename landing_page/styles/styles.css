@@ -88,6 +88,10 @@ section {
     color: #EF476F;
 }
 
+.text-yellow {
+    color: #FFD166;
+}
+
 .info-container{
     display: flex;
     justify-content: space-around;

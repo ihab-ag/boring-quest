@@ -9,7 +9,13 @@
     font-family: source-sans-bold;
     src: url(./assets/fonts/SourceSansPro-Bold.ttf);
   }
+
 /* utils */
+
+h1{
+font-family: source-sans-bold;
+font-size: 12vw;
+}
 
 img {
     width: 100%;

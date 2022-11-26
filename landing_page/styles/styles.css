@@ -39,6 +39,10 @@ ul :nth-child(2) {
     transform: translateX(25vw);
 }
 
+ul :nth-child(1) {
+    transform: translateX(0);
+}
+
 section {
     height: 100vh;
 }

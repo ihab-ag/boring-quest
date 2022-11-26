@@ -17,3 +17,10 @@ img {
 section{
     height: 100vh;
 }
+
+.animated-div{
+    background: #118AB2;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}

@@ -6,10 +6,6 @@
 
 /* utils */
 
-body {
-    background-color: #ebebeb;
-}
-
 img {
     width: 100%;
 }
@@ -18,11 +14,6 @@ img {
     padding-inline: 128px;
 }
 
-/* hero section */
-.logo-div {
-    width: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateY(-25%) translateX(-5%);
+section{
+    height: 100vh;
 }

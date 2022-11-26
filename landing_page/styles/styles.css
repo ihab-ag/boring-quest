@@ -21,6 +21,11 @@ h1 {
     font-size: 12vw;
 }
 
+h2 {
+    font-family: source-sans-bold;
+    font-size: 10vw;
+}
+
 img {
     width: 100%;
 }

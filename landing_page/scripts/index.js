@@ -1,3 +1,6 @@
+// import rellax library
+const rellax = new Rellax('.rellax');
+
 window.addEventListener('scroll', function (e) {
 
     const title = document.querySelectorAll('.title')

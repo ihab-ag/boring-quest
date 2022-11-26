@@ -25,6 +25,16 @@ img {
     width: 100%;
 }
 
+ul {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+}
+
 section {
     height: 100vh;
 }

@@ -92,6 +92,19 @@ section {
     color: #FFD166;
 }
 
+.bg-green {
+    background-color: #06D6A0;
+}
+
+.bg-red {
+    background-color: #EF476F;
+}
+
+.bg-yerllow {
+    background-color: #FFD166;
+}
+
+/* hero section */
 .info-container {
     display: flex;
     justify-content: space-around;
@@ -103,6 +116,7 @@ section {
     right: 0px;
 }
 
+/* info section */
 .square {
     width: 5vw;
     height: 5vw;

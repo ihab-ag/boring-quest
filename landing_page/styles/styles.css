@@ -40,6 +40,10 @@ img {
     width: 100%;
 }
 
+a, a:-webkit-any-link {
+    text-decoration: none;
+}
+
 ul {
     height: 100vh;
     display: flex;
@@ -129,6 +133,13 @@ section {
     width: 80vw;
 }
 
-a, a:-webkit-any-link {
-    text-decoration: none;
-}
+
+/* media queries */
+@media screen and (max-width: 820px) {
+    body {
+      overflow-y: hidden;
+    }
+    section{
+        height: 50vh;
+    }
+  }

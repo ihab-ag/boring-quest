@@ -6,11 +6,6 @@
 
 /* fonts */
 @font-face {
-    font-family: source-sans;
-    src: url(./assets/fonts/SourceSansPro-Regular.ttf);
-}
-
-@font-face {
     font-family: source-sans-bold;
     src: url(./assets/fonts/SourceSansPro-Bold.ttf);
 }
@@ -40,7 +35,8 @@ img {
     width: 100%;
 }
 
-a, a:-webkit-any-link {
+a,
+a:-webkit-any-link {
     text-decoration: none;
 }
 
@@ -137,9 +133,10 @@ section {
 /* media queries */
 @media screen and (max-width: 820px) {
     body {
-      overflow-y: hidden;
+        overflow-y: hidden;
     }
-    section{
+
+    section {
         height: 50vh;
     }
-  }
+}

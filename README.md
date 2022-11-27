@@ -64,6 +64,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| ----- |
 | <img src='./readme/stats_imp.gif'/> | <img src='./readme/companions_imp.gif'> |
 
+| Landing page  | 
+| -----------------| 
+| <img src='./readme/landing-page.gif'/> |
+
 <br><br>
 <img src="./readme/title6.svg"/>
 

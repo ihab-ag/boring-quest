@@ -70,6 +70,7 @@ const AdventureForm = ({ navigation }) => {
                                     />
                                     {touched.name && errors.name && <ErrorText text={errors.name} />}
                                 </View>
+                                {/* Adventure description */}
                                 <View className='mt-2'>
                                     <LabelText color='text-white' title='Adventure description' />
                                     <InputText

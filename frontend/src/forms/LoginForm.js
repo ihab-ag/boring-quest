@@ -66,6 +66,7 @@ const LoginForm = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View className='p-2'>
+                        {/* username */}
                         <View className='py-2 mt-2'>
                             <LabelText title='Username' color='text-primary' />
                             <InputText
@@ -76,6 +77,7 @@ const LoginForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.username && errors.username && <ErrorText text={errors.username} />}
+                        {/* password */}
                         <View className='py-2'>
                             <LabelText title='Password' color='text-primary' />
                             <InputText
@@ -87,6 +89,7 @@ const LoginForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
+                        {/* signup and login buttons */}
                         <View className='flex-row flex-1 justify-between py-2 mt-2'>
                             <Button color='bg-secondary' title='SIGNUP' onPress={() => navigation.navigate('Sign Up')} />
                             <View className='w-2' />

@@ -58,18 +58,21 @@ const ActivityGraph = ({ name }) => {
     }
 
     const quests = useSelector(state=> state.quests)
+
     const graphData = [
         makeGraph(quests.midnight),
         makeGraph(quests.morning),
         makeGraph(quests.afternoon),
         makeGraph(quests.night)
     ]
+
     const path = useComputedValue(() => {
         const start = graphData[state.current.current].curve
         const end = graphData[state.current.next].curve
         const result = start.interpolate(end, transition.current)
         return result?.toSVGString() ?? '0'
     }, [state, transition])
+    
     return (
         <>
             <View className='rounded-lg border-2 border-primary mt-4 '>

@@ -37,6 +37,7 @@ const SignUpForm = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
                     <View className='p-2'>
+                        {/* name */}
                         <View className='py-2 mt-2'>
                             <LabelText title='Name' color='text-primary' />
                             <InputText
@@ -47,6 +48,7 @@ const SignUpForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.name && errors.name && <ErrorText text={errors.name} />}
+                        {/* username */}
                         <View className='py-2'>
                             <LabelText title='Username' color='text-primary' />
                             <InputText
@@ -57,6 +59,7 @@ const SignUpForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.username && errors.username && <ErrorText text={errors.username} />}
+                        {/* password */}
                         <View className='py-2'>
                             <LabelText title='Password' color='text-primary' />
                             <InputText
@@ -68,6 +71,7 @@ const SignUpForm = ({ navigation }) => {
                                 login={true} />
                         </View>
                         {touched.password && errors.password && <ErrorText text={errors.password} />}
+                        {/* type */}
                         <View className='mt-2 flex-1' >
                             <LabelText title='Type' color='text-primary' />
                             <View className='flex-row mt-2 flex-1'>
@@ -76,6 +80,7 @@ const SignUpForm = ({ navigation }) => {
                                 <Tab title='Guild' onPress={() => setFieldValue('type', 'guild')} selected={values.type === 'guild'} />
                             </View>
                         </View>
+                        {/* buttons */}
                         <View className='flex-1 justify-between mt-4'>
                             <Button color='bg-primary' title='SIGNUP' onPress={handleSubmit} />
                             <View className='h-2' />

@@ -9,8 +9,8 @@ import QuestsSections from '../components/QuestsSections'
 const QuestsScreen = ({ navigation, route }) => {
     const user = useSelector(state => state.user)
     const { year, month, day } = useSelector(state => state.date)
-    let questsMap = {}
     const quests_obj = useSelector(state => state.quests.map)
+    let questsMap = {}
 
         const daily_quests = []
         const weekly_quests = []
@@ -19,6 +19,7 @@ const QuestsScreen = ({ navigation, route }) => {
         const adventures = []
         
         try {
+            // sort current day quests into adjacent quest type array
             for (const quest in quests_obj[year][month][day]) {
                 if (quests_obj[year][month][day][quest]['quest']['type'] === 'daily')
                     daily_quests.push(quests_obj[year][month][day][quest]['quest'])
@@ -32,6 +33,7 @@ const QuestsScreen = ({ navigation, route }) => {
                     adventures.push(quests_obj[year][month][day][quest]['quest'])
                 
             }
+            // store quests array in quests map object
             questsMap = {
                 'daily': daily_quests,
                 'weekly': weekly_quests,

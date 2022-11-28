@@ -60,6 +60,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| ----- | ----- |
 | <img src='./readme/quests_imp.gif'/> | <img src='./readme/quest_imp.jpg'> | <img src='./readme/adventure_imp.jpg'> |
 
+| Adventure & Quest Pages  | Login |
+| -----------------| ----- |
+| <img src='./readme/adventure-quest_imp.gif'/> | <img src='./readme/login_imp.gif'> |
+
 | Statistics  | Companions |
 | -----------------| ----- |
 | <img src='./readme/stats_imp.gif'/> | <img src='./readme/companions_imp.gif'> |
